@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="小白菜别跑的博客">
 <meta property="og:description" content="Git安装-使用入门教程">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-25T14:30:12.734Z">
+<meta property="og:updated_time" content="2018-08-25T14:47:52.158Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git安装-使用">
 <meta name="twitter:description" content="Git安装-使用入门教程">
@@ -209,15 +209,14 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^ <span class="comment">#或HEAD~n 多个版本</span></span><br><span class="line">git reset --hard <span class="built_in">log</span>-id <span class="comment">#指定版本</span></span><br></pre></td></tr></table></figure>
 <h2 id="4-3-保存工作现场"><a href="#4-3-保存工作现场" class="headerlink" title="4.3 保存工作现场"></a>4.3 保存工作现场</h2><p>当正在开发中时又新接一个急着处理的需求时，而且正在开发的东西有还没有完成，不利于提交代码时我们就需要保存当前的工作现场，处理完棘手需求后在还原继续。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git stash <span class="comment">#保存工作</span></span><br><span class="line">git stash list <span class="comment">#查看工作</span></span><br><span class="line">git stash pop <span class="comment">#还原最新的工作</span></span><br><span class="line">git stash pop stash@&#123;num&#125; <span class="comment">#指定还原工作</span></span><br><span class="line">git stash clear <span class="comment">#清空所有工作</span></span><br><span class="line">git stash drop stash@&#123;num&#125; <span class="comment">#删除指定工作</span></span><br></pre></td></tr></table></figure>
-<h1 id="5-文件忽略"><a href="#5-文件忽略" class="headerlink" title="5 文件忽略"></a>5 文件忽略</h1><p>忽略本地不想提交至版本库的文件，在根目录。</p>
+<h1 id="5-文件忽略"><a href="#5-文件忽略" class="headerlink" title="5. 文件忽略"></a>5. 文件忽略</h1><p>忽略本地不想提交至版本库的文件，在根目录。</p>
 <h2 id="5-1-忽略新建文件-不存在版本库中"><a href="#5-1-忽略新建文件-不存在版本库中" class="headerlink" title="5.1 忽略新建文件(不存在版本库中)"></a>5.1 忽略新建文件(不存在版本库中)</h2><p>根目录创建.gitignore文件</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*.<span class="built_in">log</span> <span class="comment">#"*"代表模糊</span></span><br><span class="line">dir/ <span class="comment">#"/"代表目录</span></span><br><span class="line">file.txt <span class="comment">#忽略文件</span></span><br><span class="line">!filter.txt <span class="comment">#不忽略文件</span></span><br></pre></td></tr></table></figure>
 <h2 id="5-2-已存在版本库中的文件"><a href="#5-2-已存在版本库中的文件" class="headerlink" title="5.2 已存在版本库中的文件"></a>5.2 已存在版本库中的文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git update-index --assume-unchanged &lt;文件&gt;</span><br></pre></td></tr></table></figure>
-<h1 id="6-开发规范"><a href="#6-开发规范" class="headerlink" title="6 开发规范"></a>6 开发规范</h1><h2 id="6-1-注意事项"><a href="#6-1-注意事项" class="headerlink" title="6.1 注意事项"></a>6.1 注意事项</h2><blockquote>
+<h1 id="6-开发规范"><a href="#6-开发规范" class="headerlink" title="6. 开发规范"></a>6. 开发规范</h1><h2 id="6-1-注意事项"><a href="#6-1-注意事项" class="headerlink" title="6.1 注意事项"></a>6.1 注意事项</h2><blockquote>
 <p>1.为避免冲突开发时必须先拉取远程最新的代码 git pull。<br>2.本地开发时尽量对已开发完成或业务逻辑完整的代码及时更新到远程，避免对团队其他同事照成影响，减少冲突范围。<br>3.多敲多用，熟能生巧。</p>
 </blockquote>
 <h2 id="6-2-使用流程"><a href="#6-2-使用流程" class="headerlink" title="6.2 使用流程"></a>6.2 使用流程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git status <span class="comment"># 1.查看修改状态</span></span><br><span class="line">git add &lt;文件&gt; <span class="comment"># 2.添加至暂存区</span></span><br><span class="line">git commit -m <span class="string">"msg"</span> <span class="comment"># 3.提交至版本库</span></span><br><span class="line">git push <span class="comment"># 4.推送至远程</span></span><br><span class="line">git merge branch-name <span class="comment"># 5.如有需要则合并分支</span></span><br><span class="line">git tag -a &lt;版本号&gt; -m <span class="string">"msg"</span> <span class="comment"># 6.打标签 发布版本 视情况使用 一般在较大版本改动的情况下使用</span></span><br><span class="line">git push origin &lt;版本号&gt; <span class="comment">#提交版本信息</span></span><br></pre></td></tr></table></figure>
-
       
 
       
@@ -336,8 +335,8 @@
 <nav id="article-nav">
   
   
-    <a href="/2018/03/14/MySQL数据库优化/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MySQL数据库优化</div>
+    <a href="/2018/08/25/COOKIE与SESSION/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">COOKIE与SESSION</div>
       <i class="icon-circle-right"></i>
     </a>
   
