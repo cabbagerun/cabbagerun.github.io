@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="小白菜别跑的博客">
 <meta property="og:description" content="COOKIE与SESSION功能及使用">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-25T14:58:02.532Z">
+<meta property="og:updated_time" content="2018-08-26T15:25:03.719Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="COOKIE与SESSION">
 <meta name="twitter:description" content="COOKIE与SESSION功能及使用">
@@ -169,12 +169,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>session和cookie这些都是基础知识，从性能、资源和可扩展性来说都有各自的优缺点，避免不正确使用，还有必要做深入了解。</p>
+        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>session和cookie这些都是基础知识，最开始出现的目的就是为了解决会话控制，但从性能、资源和可扩展性来说都有各自的优缺点，避免不正确使用，还是有必要做深入了解。</p>
 <a id="more"></a>
 <h1 id="2-场景"><a href="#2-场景" class="headerlink" title="2. 场景"></a>2. 场景</h1><blockquote>
 <p>1.运用于web网页或h5比较多。<br>2.一般用于记录用户的登陆信息或小型网站的购物车信息。</p>
 </blockquote>
-<h1 id="2-COOKIE"><a href="#2-COOKIE" class="headerlink" title="2. COOKIE"></a>2. COOKIE</h1><h1 id="3-SESSION"><a href="#3-SESSION" class="headerlink" title="3. SESSION"></a>3. SESSION</h1><h1 id="4-区别"><a href="#4-区别" class="headerlink" title="4. 区别"></a>4. 区别</h1><h1 id="5-优化"><a href="#5-优化" class="headerlink" title="5. 优化"></a>5. 优化</h1>
+<h1 id="2-COOKIE"><a href="#2-COOKIE" class="headerlink" title="2. COOKIE"></a>2. COOKIE</h1><blockquote>
+<p>1.由于http请求是无状态的，即第一次请求成功后再次请求服务器无法判断两次请求是否来自同一个用户，cookie的出现就是为了解决这种会话问题，当第一次请求成功后服务器就会返回一段cookie信息到浏览器，浏览器将cookie信息保存到本地，再次请求时浏览器就会自动将这部分cookie信息携带到服务器，服务器就能通过这段cookie信息判断是哪个用户发起的请求了。<br>2.由于不同的浏览器对cookie存储数据的大小和个数都有限，大小一般不超过4KB，因此cookie只能用于存储小数据。</p>
+</blockquote>
+<h1 id="3-SESSION"><a href="#3-SESSION" class="headerlink" title="3. SESSION"></a>3. SESSION</h1><blockquote>
+<p>1.session和cookie的作用类似，都是为了存储用户相关的信息。不同的是，cookie是存储在本地浏览器，而session存储在服务器。存储在服务器的数据会更加的安全，不容易被窃取。但存储在服务器也有一定的弊端，就是会占用服务器的资源。</p>
+</blockquote>
+<h1 id="4-区别"><a href="#4-区别" class="headerlink" title="4. 区别"></a>4. 区别</h1><blockquote>
+<p>1.存储类型：session可以存储任意类型的数据，但cookie只能存储字符串。<br>2.存储位置：cookie存储浏览器，session存储服务器，因此session较cookie安全，并且session会消耗服务器资源，浏览器则不考虑资源消耗。<br>3.数据大小：每个cookie数据大小限制在4KB，session一般不做限制。</p>
+</blockquote>
+<h1 id="5-优化"><a href="#5-优化" class="headerlink" title="5. 优化"></a>5. 优化</h1><h2 id="5-1-session共享"><a href="#5-1-session共享" class="headerlink" title="5.1 session共享"></a>5.1 session共享</h2><blockquote>
+<p>1.利用redis，memcache等缓存至内存中，高效，便捷，可以单独一台缓存服务器维护多台服务器的session。</p>
+</blockquote>
+<h2 id="5-2-session替代"><a href="#5-2-session替代" class="headerlink" title="5.2 session替代"></a>5.2 session替代</h2><blockquote>
+<p>1.session保存在服务器是占用服务器资源的，对一些用户登陆信息和购物车商品信息可以使用更高效的nosql工具，如redis，memcache等。</p>
+</blockquote>
+<h2 id="5-3-cookie禁用"><a href="#5-3-cookie禁用" class="headerlink" title="5.3 cookie禁用"></a>5.3 cookie禁用</h2><p>cookie被禁用是不可控的，浏览器cookie和服务器session保存会话管理实质是通过一个SESSION ID保持连接的，当cookie被禁用是可将这部分信息通过其他的形式进行保存即可。</p>
+<blockquote>
+<p>1.url直接传输，具体可通过一定技术进行加解密。<br>2.存储至缓存或直接入库，前提是必须有一个唯一的标识指定某个用户。</p>
+</blockquote>
+
       
 
       
