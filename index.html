@@ -170,10 +170,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>目前主流的api请求的通信通道是https和http，https是走加密通道的，但使用抓包工具很容易就可以抓取到数据，更别提http通道了，只要是能抓取的api就有被篡改的风险，数据也是一览无余，就先讲讲通过url签名怎样防止请求被篡改。</p>
-<h1 id="2-生成规则"><a href="#2-生成规则" class="headerlink" title="2. 生成规则"></a>2. 生成规则</h1><h2 id="2-1-字符串"><a href="#2-1-字符串" class="headerlink" title="2.1 字符串"></a>2.1 字符串</h2><blockquote>
-<p>1.获取域名或主机地址，$_SERVER[‘HTTP_HOST’]，可拼接http或https通信通道。<br>2.获取网页地址，$_SERVER[‘PHP_SELF’]。<br>3.获取请求参数，$_REQUEST，并将请求产生排序拼接成字符串。<br>4.为增加安全性，可将用户相关的唯一信息处理后生成后缀，如id或手机号等等，对其进行特殊处理()，<br>5.将获取的域名或主机地址，网页地址，请求参数字符串，后缀拼接成需要签名的字符串。<br>6.md5加密字符串并大写(此规则可执行选择加密算法)。</p>
-</blockquote>
-<h2 id="2-2-后缀"><a href="#2-2-后缀" class="headerlink" title="2.2 后缀"></a>2.2 后缀</h2><h1 id="3-例举"><a href="#3-例举" class="headerlink" title="3. 例举"></a>3. 例举</h1>
+        
       
 
       
