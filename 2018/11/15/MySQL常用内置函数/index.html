@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="www.jr968.cn">
-  <title>Archives: 2018/8 | 小白菜别跑的博客</title>
+  <title>MySQL常用内置函数 | 小白菜别跑的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="小白菜别跑的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="小白菜别跑的博客">
-<meta property="og:url" content="www.jr968.cn/archives/2018/08/index.html">
+  <meta name="description" content="MySQL常用内置函数">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL常用内置函数">
+<meta property="og:url" content="www.jr968.cn/2018/11/15/MySQL常用内置函数/index.html">
 <meta property="og:site_name" content="小白菜别跑的博客">
-<meta property="og:description" content="小白菜别跑的博客">
+<meta property="og:description" content="MySQL常用内置函数">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-11-15T04:12:04.042Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="小白菜别跑的博客">
-<meta name="twitter:description" content="小白菜别跑的博客">
+<meta name="twitter:title" content="MySQL常用内置函数">
+<meta name="twitter:description" content="MySQL常用内置函数">
   
     <link rel="alternative" href="/atom.xml" title="小白菜别跑的博客" type="application/atom+xml">
   
@@ -147,78 +149,79 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-MySQL常用内置函数" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/27/API-URL签名方式/" class="archive-article-date">
-  	<time datetime="2018-08-27T15:21:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-27</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/27/API-URL签名方式/">API-URL签名方式</a>
+    <h1 class="article-title" itemprop="name">
+      MySQL常用内置函数
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据安全</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/27/MySQL支持emoji表情/" class="archive-article-date">
-  	<time datetime="2018-08-27T14:45:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-27</time>
+        
+        <a href="/2018/11/15/MySQL常用内置函数/" class="archive-article-date">
+  	<time datetime="2018-11-15T02:58:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-11-15</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/27/MySQL支持emoji表情/">MySQL支持emoji表情</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-说明"><a href="#1-说明" class="headerlink" title="1. 说明"></a>1. 说明</h1><p>作为一个服务端码农来说，mysql的涉略绝不是偶然的，掌握基本的增删改查只能说明你已经入门了而已，并不代表你能玩转，也许你有时候也会注意到数据库得到的结果并不符合你的业务需求，往往要借助其他的语言的包装处理，其实大部分语言能做的mysql也能实现；但mysql并不能代替应用层语言，原因事mysql内置函数需要CPU做计算，而数据库也是应用的瓶颈，对于小型系统来说可以适当使用(用户量不大，并发不高或基本0并发)，中大型系统杜绝则使用，可能会因为一个mysql函数造成悲剧。</p>
+<a id="more"></a>
+<h1 id="2-以下是常用的MYSQL内置函数"><a href="#2-以下是常用的MYSQL内置函数" class="headerlink" title="2. 以下是常用的MYSQL内置函数"></a>2. 以下是常用的MYSQL内置函数</h1><h2 id="2-1-数值函数"><a href="#2-1-数值函数" class="headerlink" title="2.1 数值函数"></a>2.1 数值函数</h2><blockquote>
+<p>abs(x)：返回绝对值<br>ceil(x)：返回大于x的最小整数<br>floor(x)：返回小于x的最大整数<br>mod(x,y)：返回x与y的模<br>rand()：返回0-1之间的随机数，select round(rand() * 100)<br>round(x,y)：返回参数x的y位小数的四舍五入结果<br>truncate(x,y)：返回数字x截断为y位小数的结果</p>
+</blockquote>
+<h2 id="2-2-字符串函数"><a href="#2-2-字符串函数" class="headerlink" title="2.2 字符串函数"></a>2.2 字符串函数</h2><blockquote>
+<p>concat(s1,s2….sn)：把传入的参数连接成一个字符串<br>insert(str,x,y,insert)：从str的x位置开始，替换y长度的字符串为insert_str，如：select insert(‘abcdefg’,2,3,’hello’)结果为：ahelloefg;<br>lower(str),upper(str),initcap(word)：将字符串转换为大写，小写，单词首字母大写<br>left(str,x),right(str,x)：返回str左边（右边）x个字符，x为null则返回null<br>lpad(str,n,pad),rpad(str,n,pad)：用pad对字符串str从最左边（右边）进行填充，直到总长度达到n<br>trim(),ltrim(),rtrim()：去掉两边，左边，右边空格<br>replace(str,a,b)：在字符串str中用字符串b替换所有的字符串a<br>strcmp(s1,s2)：如果S1比S2小，返回-1；如果S1比S2大则返回1；如果相等则返回0（比较的是ASC2码）<br>substring(str,x,y)：返回字符串str中从位置x起，长度为y的子字符串</p>
+</blockquote>
+<h2 id="2-3-日期函数"><a href="#2-3-日期函数" class="headerlink" title="2.3 日期函数"></a>2.3 日期函数</h2><blockquote>
+<p>curdate(),curtime(),now()：curdate获取yyyy-mm-dd，curtime获取hh:ii:ss，now获取yyyy-mm-dd hh:ii:ss<br>unix_timestamp([‘yyyy-mm-dd hh:ii:ss’])：获取时间戳<br>from_unixtime(1331110656)：获取yyyy-mm-dd hh:ii:ss<br>week(now()),year(now()),month(now()),day(now()),hour(now()),minute(now()),second(now())：单独获取年月日时分秒周<br>date_format(now(),”%Y-%m-%d %H:%i:%s”)：格式显示日期/时间数据<br>date_add(now(), interval 1 day)：增加一天(year/month/day/hour/minute/second/microsecond)<br>last_day(now())：指定月份最后一天</p>
+</blockquote>
+<h2 id="2-4-复合数据"><a href="#2-4-复合数据" class="headerlink" title="2.4 复合数据"></a>2.4 复合数据</h2><blockquote>
+<p>count(),sum(),max(),min(),avg()</p>
+</blockquote>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -230,99 +233,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:www.jr968.cn/2018/11/15/MySQL常用内置函数/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/25/COOKIE与SESSION/" class="archive-article-date">
-  	<time datetime="2018-08-25T14:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-25</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/27/API-URL签名方式/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">API-URL签名方式</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/25/COOKIE与SESSION/">COOKIE与SESSION</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/25/Git安装与使用/" class="archive-article-date">
-  	<time datetime="2018-08-25T12:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/25/Git安装与使用/">Git安装与使用</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Github</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
+  
 
 
           </div>
@@ -345,8 +355,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
