@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="小白菜别跑的博客">
 <meta property="og:description" content="Git安装与使用入门教程">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-12-11T03:23:29.159Z">
+<meta property="og:updated_time" content="2018-12-11T03:26:21.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git安装与使用">
 <meta name="twitter:description" content="Git安装与使用入门教程">
@@ -219,7 +219,7 @@
 </blockquote>
 <h2 id="6-2-使用流程"><a href="#6-2-使用流程" class="headerlink" title="6.2 使用流程"></a>6.2 使用流程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git status <span class="comment"># 1.查看修改状态</span></span><br><span class="line">git add &lt;文件&gt; <span class="comment"># 2.添加至暂存区</span></span><br><span class="line">git commit -m <span class="string">"msg"</span> <span class="comment"># 3.提交至版本库</span></span><br><span class="line">git push <span class="comment"># 4.推送至远程</span></span><br><span class="line">git merge branch-name <span class="comment"># 5.如有需要则合并分支</span></span><br><span class="line">git tag -a &lt;版本号&gt; -m <span class="string">"msg"</span> <span class="comment"># 6.打标签 发布版本 视情况使用 一般在较大版本改动的情况下使用</span></span><br><span class="line">git push origin &lt;版本号&gt; <span class="comment">#提交版本信息</span></span><br></pre></td></tr></table></figure>
 <h1 id="7-开发流程"><a href="#7-开发流程" class="headerlink" title="7. 开发流程"></a>7. 开发流程</h1><h2 id="7-1-分支概述"><a href="#7-1-分支概述" class="headerlink" title="7.1 分支概述"></a>7.1 分支概述</h2><blockquote>
-<p>1.master：用于打包更新代码到生产服务器<br>2.master-hot-fix：此分支与master分支保持一致，用于紧急bug的处理，处理完成合并至release，测试确认无误后再合并到master、develop<br>3.release：用于打包更新代码到测试服务器，测试完成后合并至maser分支并发布生产<br>4.develop：开发公共分支，功能开发完成并本地测试完成后再合并至release分支<br>5.feature：本地个人开发分支，如hot-fix/xxx-test-feature，发时需拉取develop分支最新代码</p>
+<p>1.master：用于打包更新代码到生产服务器<br>2.master-hot-fix：此分支与master分支保持一致，用于紧急bug的处理，处理完成合并至release，测试确认无误后再合并到master、develop<br>3.release：用于打包更新代码到测试服务器，测试完成后合并至maser分支并发布生产<br>4.develop：开发公共分支，功能开发完成并本地测试完成后再合并至release分支<br>5.feature：本地个人开发分支，如hot-fix/xxx-test-feature，开发前先拉取develop分支最新代码</p>
 </blockquote>
 
       
