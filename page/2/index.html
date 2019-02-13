@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="www.jr968.cn">
-  <title>MySQL支持emoji表情 | 小白菜别跑的博客</title>
+  <title>小白菜别跑的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="MySQL如何支持emoji表情使用">
-<meta name="keywords" content="MySQL">
-<meta property="og:type" content="article">
-<meta property="og:title" content="MySQL支持emoji表情">
-<meta property="og:url" content="www.jr968.cn/2018/08/27/MySQL支持emoji表情/index.html">
+  <meta name="description" content="小白菜别跑的博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="小白菜别跑的博客">
+<meta property="og:url" content="www.jr968.cn/page/2/index.html">
 <meta property="og:site_name" content="小白菜别跑的博客">
-<meta property="og:description" content="MySQL如何支持emoji表情使用">
+<meta property="og:description" content="小白菜别跑的博客">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-27T15:19:20.445Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL支持emoji表情">
-<meta name="twitter:description" content="MySQL如何支持emoji表情使用">
+<meta name="twitter:title" content="小白菜别跑的博客">
+<meta name="twitter:description" content="小白菜别跑的博客">
   
     <link rel="alternative" href="/atom.xml" title="小白菜别跑的博客" type="application/atom+xml">
   
@@ -149,68 +147,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MySQL支持emoji表情" class="article article-type-post " itemscope itemprop="blogPost">
+            
+  
+    <article id="post-使用hexo-github搭建免费个人博客" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      MySQL支持emoji表情
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/03/09/使用hexo-github搭建免费个人博客/">使用hexo+github搭建免费个人博客</a>
     </h1>
   
 
         
-        <a href="/2018/08/27/MySQL支持emoji表情/" class="archive-article-date">
-  	<time datetime="2018-08-27T14:45:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-27</time>
+        <a href="/2018/03/09/使用hexo-github搭建免费个人博客/" class="archive-article-date">
+  	<time datetime="2018-03-09T12:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>mysql数据库的默认字符集utf8，只能存储3个字节的数据，标准的emoji表情是4个字节，所以你会看到客户端输入的emoji表情在数据库和前端展示时候只有几个问号，在APP端输入保存表情是用户的普遍需求和行为，也是必须解决的小问题。</p>
-<a id="more"></a>
-<h1 id="2-MySQL字符集设置"><a href="#2-MySQL字符集设置" class="headerlink" title="2. MySQL字符集设置"></a>2. MySQL字符集设置</h1><p>更换字符集utf8–&gt;utf8mb4，兼容四个字节，也向下兼容utf8，所以即便修改了字段的字符集也不会影响线上数据。</p>
-<h2 id="2-1-字段"><a href="#2-1-字段" class="headerlink" title="2.1 字段"></a>2.1 字段</h2><h3 id="2-1-1-修改字段"><a href="#2-1-1-修改字段" class="headerlink" title="2.1.1 修改字段"></a>2.1.1 修改字段</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table `table_name` modify `content` text not null default <span class="string">''</span> character <span class="built_in">set</span> utf8mb4 collate utf8mb4_unicode_ci comment <span class="string">'内容'</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="2-1-2-创建表"><a href="#2-1-2-创建表" class="headerlink" title="2.1.2 创建表"></a>2.1.2 创建表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table `table_name`(</span><br><span class="line">	`id` int(10) unsigned not null auto_increment,</span><br><span class="line">	`content` text not null default <span class="string">''</span> character <span class="built_in">set</span> utf8mb4 collate utf8mb4_unicode_ci comment <span class="string">'内容'</span>,</span><br><span class="line">	primary key(`id`)</span><br><span class="line">) engined=innodb default charset=utf8 comment <span class="string">'表名'</span>;</span><br></pre></td></tr></table></figure>
-<h2 id="2-2-表"><a href="#2-2-表" class="headerlink" title="2.2 表"></a>2.2 表</h2><h3 id="2-2-1-创建表"><a href="#2-2-1-创建表" class="headerlink" title="2.2.1 创建表"></a>2.2.1 创建表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">create table `table_name`(</span><br><span class="line">	`id` int(10) unsigned not null auto_increment,</span><br><span class="line">	`content` text not null default <span class="string">''</span> comment <span class="string">'内容'</span>,</span><br><span class="line">	primary key(`id`)</span><br><span class="line">) engined=innodb default charset=utf8mb4 comment <span class="string">'表名'</span>;</span><br></pre></td></tr></table></figure>
-<h3 id="2-2-2-修改表"><a href="#2-2-2-修改表" class="headerlink" title="2.2.2 修改表"></a>2.2.2 修改表</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alter table `table_name` charset=utf8mb4;</span><br></pre></td></tr></table></figure>
-<h2 id="2-3-库"><a href="#2-3-库" class="headerlink" title="2.3 库"></a>2.3 库</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> names utf8mb4;</span><br></pre></td></tr></table></figure>
-<h1 id="3-连接数据库"><a href="#3-连接数据库" class="headerlink" title="3. 连接数据库"></a>3. 连接数据库</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">return</span> array(</span><br><span class="line">    <span class="string">'URL_CASE INSENSITIVE'</span> =&gt; <span class="literal">true</span>,</span><br><span class="line">    <span class="string">'DB_DEPLOY_TYPE'</span> =&gt; 1,//是否启用分布式</span><br><span class="line">    <span class="string">'DB_RW_SEPARATE'</span>=&gt;<span class="literal">true</span>,//是否启用智能读写分离</span><br><span class="line">    <span class="string">'DB_TYPE'</span> =&gt; <span class="string">'mysql'</span>,</span><br><span class="line">    <span class="string">'DB_HOST'</span> =&gt; <span class="string">'localhost'</span>,</span><br><span class="line">    <span class="string">'DB_USER'</span> =&gt; <span class="string">'root'</span>,</span><br><span class="line">    <span class="string">'DB_PWD'</span>  =&gt; <span class="string">'root'</span>,</span><br><span class="line">    <span class="string">'DB_NAME'</span> =&gt; <span class="string">'db_name'</span>,</span><br><span class="line">    <span class="string">'DB_PORT'</span> =&gt; <span class="string">'3306'</span>,</span><br><span class="line">    <span class="string">'DB_PREFIX'</span> =&gt; <span class="string">'t_'</span>,</span><br><span class="line">    <span class="string">'DB_CHARSET'</span> =&gt; <span class="string">'utf8mb4'</span>,//字符集设置</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>最近这几天，没事干，想找点事折腾下，于是自己便想到了自己一直在干的一件事–做笔记，其实笔记写在笔记本上或者文档上翻阅的时候是很不方便的，而且又不方便共享，于是就像整一个简单的博客出来，也乘机学点新东西。看网上目前搭建个人博客最好的是用wordpress，但是这个折腾起来好像还挺麻烦的，毕竟自己需要的是一个简单的博客，方便记录所学笔记和翻阅罢了，然后就是用了Github Page。</p>
+        
       
 
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/alipay.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/weixin.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -221,7 +183,19 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Github</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">Hexo</a>
         		</li>
       		
 		</ul>
@@ -230,84 +204,16 @@
       
 
       
-
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/03/09/使用hexo-github搭建免费个人博客/">展开全文 >></a>
+        </p>
       
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:www.jr968.cn/2018/08/27/MySQL支持emoji表情/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/08/27/API-URL签名方式/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          API-URL签名方式
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2018/08/25/COOKIE与SESSION/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">COOKIE与SESSION</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -327,14 +233,12 @@
 
 
 
-  
-  
-  
 
   
-
   
-
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -357,8 +261,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
