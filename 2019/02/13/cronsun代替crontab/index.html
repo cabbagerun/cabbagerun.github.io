@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="小白菜别跑的博客">
 <meta property="og:description" content="分布式任务系统cronsun代替原始的crontab">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-26T03:01:40.248Z">
+<meta property="og:updated_time" content="2019-02-26T07:06:23.919Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cronsun代替crontab">
 <meta name="twitter:description" content="分布式任务系统cronsun代替原始的crontab">
@@ -208,7 +208,7 @@
 <p>全部服务启动完毕，打开网址：主机:7079/ui/#/node<br>默认登录账号密码：<a href="mailto:admin@admin.com" target="_blank" rel="noopener">admin@admin.com</a>/admin</p>
 <p>#4 邮件报警</p>
 <p>编辑mail.json配置：<br>注意：#代表已注释，网上说LocalName建议留空(自行测试)</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"Enable"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"To"</span>: [<span class="string">"这里填写缺省默认的告警邮件接收地址"</span>],</span><br><span class="line">    <span class="string">"#HttpAPI"</span>: <span class="string">"如有此字段，则按 http api 方式发送"</span>,</span><br><span class="line">    <span class="string">"#Keepalive"</span>: <span class="string">"如果此时间段内没有邮件发送，则关闭 SMTP 连接，单位/秒"</span>,</span><br><span class="line">    <span class="string">"Keepalive"</span>: 30,</span><br><span class="line">    <span class="string">"#doc"</span>: <span class="string">"https://godoc.org/github.com/go-gomail/gomail#Dialer"</span>,</span><br><span class="line">    <span class="string">"Host"</span>: <span class="string">"填写SMTP服务器地址，比如：stmp.qq.com"</span>,</span><br><span class="line">    <span class="string">"Port"</span>: 25,</span><br><span class="line">    <span class="string">"Username"</span>: <span class="string">"这里填写发送人邮箱地址（用于登陆SMTP+from地址）"</span>,</span><br><span class="line">    <span class="string">"Password"</span>: <span class="string">"登陆密码"</span>,</span><br><span class="line">    <span class="string">"SSL"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"LocalName"</span>: <span class="string">""</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"Enable"</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="string">"To"</span>: [<span class="string">"这里填写缺省默认的告警邮件接收地址"</span>],</span><br><span class="line">    <span class="string">"#HttpAPI"</span>: <span class="string">"如有此字段，则按 http api 方式发送"</span>,</span><br><span class="line">    <span class="string">"#Keepalive"</span>: <span class="string">"如果此时间段内没有邮件发送，则关闭 SMTP 连接，单位/秒"</span>,</span><br><span class="line">    <span class="string">"Keepalive"</span>: 30,</span><br><span class="line">    <span class="string">"#doc"</span>: <span class="string">"https://godoc.org/github.com/go-gomail/gomail#Dialer"</span>,</span><br><span class="line">    <span class="string">"Host"</span>: <span class="string">"填写SMTP服务器地址，比如：stmp.qq.com/smtp.163.com等"</span>,</span><br><span class="line">    <span class="string">"Port"</span>: 25,</span><br><span class="line">    <span class="string">"Username"</span>: <span class="string">"这里填写发送人邮箱地址（用于登陆SMTP+from地址）"</span>,</span><br><span class="line">    <span class="string">"Password"</span>: <span class="string">"登陆密码"</span>,</span><br><span class="line">    <span class="string">"SSL"</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="string">"LocalName"</span>: <span class="string">""</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>必须将 Enable 填为 true 才可以看到上图的告警开关按钮</p>
 
       
@@ -472,19 +472,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">node.js</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>
