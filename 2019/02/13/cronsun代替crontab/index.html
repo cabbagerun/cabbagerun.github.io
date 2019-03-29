@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="小白菜别跑的博客">
 <meta property="og:description" content="分布式任务系统cronsun代替原始的crontab">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-02-26T07:06:23.919Z">
+<meta property="og:updated_time" content="2019-03-29T08:59:07.305Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cronsun代替crontab">
 <meta name="twitter:description" content="分布式任务系统cronsun代替原始的crontab">
@@ -191,7 +191,7 @@
 <p>etcdctl 是 etcd 的客户端命令行。<br>特别提醒：使用前，务必设置环境变量 ETCDCTL_API=3<br>在 /etc/profile 中加入以下内容：<br>export ETCDCTL_API=3</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">./etcdctl put name zhangsan    <span class="comment">#设置key/value</span></span><br><span class="line"></span><br><span class="line">./etcdctl get name             <span class="comment">#获取value</span></span><br><span class="line"></span><br><span class="line">./etcdctl del name             <span class="comment">#删除key</span></span><br></pre></td></tr></table></figure>
 <p>##2.3 部署cronsun</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/shunfei/cronsun/releases/download/v0.3.4/cronsun-v0.3.4-linux-amd64.zip   <span class="comment">#下载，也可到地址https://github.com/shunfei/cronsun/releases下载可用版本</span></span><br><span class="line"></span><br><span class="line">unzip cronsun-v0.3.4-linux-amd64.zip                                                              <span class="comment">#解压</span></span><br><span class="line"></span><br><span class="line">mv cronsun-v0.3.4-linux-amd64/ /usr/<span class="built_in">local</span>/cronsun                                                 <span class="comment">#将解压包拷贝到指定目录</span></span><br><span class="line"></span><br><span class="line">./etcd --version                                                                                  <span class="comment">#查看版本</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/shunfei/cronsun/releases/download/v0.3.4/cronsun-v0.3.4-linux-amd64.zip   <span class="comment">#下载，也可到地址https://github.com/shunfei/cronsun/releases下载可用版本</span></span><br><span class="line"></span><br><span class="line">unzip cronsun-v0.3.4-linux-amd64.zip                                                              <span class="comment">#解压</span></span><br><span class="line"></span><br><span class="line">mv cronsun-v0.3.4-linux-amd64/ /usr/<span class="built_in">local</span>/cronsun                                                 <span class="comment">#将解压包拷贝到指定目录</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>cronnode: 负责调度和执行任务的<br>cronweb: 负责管理任务、查看任务执行日志的<br>conf: db/web/sercuriry等配置文件</p>
 </blockquote>
