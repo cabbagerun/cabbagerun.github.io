@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="小白菜别跑的博客">
 <meta property="og:description" content="分布式任务系统cronsun代替原始的crontab">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-01T01:57:12.672Z">
+<meta property="og:updated_time" content="2019-04-01T02:06:31.296Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cronsun代替crontab">
 <meta name="twitter:description" content="分布式任务系统cronsun代替原始的crontab">
@@ -208,7 +208,7 @@
 </blockquote>
 <p>##3.3 后台启动</p>
 <blockquote>
-<p>启动etcd服务：nohup ./etcd &gt; /dev/null 2&gt;&amp;1 &amp;<br>启动mongodb服务：./mongod -dbpath /data/db -logpath ./logs/mongo.log -logappend -fork -port 27017<br>启动cronsun节点：nohup ./cronnode -conf conf/base.json &gt; /dev/null 2&gt;&amp;1 &amp;<br>启动cronweb(管理脚本的界面)：nohup ./cronweb -conf conf/base.json &gt; /dev/null 2&gt;&amp;1 &amp;</p>
+<p>启动etcd服务：nohup ./etcd &gt; /dev/null 2&gt;&amp;1 &amp;<br>启动mongodb服务：./mongod -dbpath /data/db -logpath /data/db/mongo.log -logappend -fork -port 27017<br>启动cronsun节点：nohup ./cronnode -conf conf/base.json &gt; /dev/null 2&gt;&amp;1 &amp;<br>启动cronweb(管理脚本的界面)：nohup ./cronweb -conf conf/base.json &gt; /dev/null 2&gt;&amp;1 &amp;</p>
 </blockquote>
 <p>全部服务启动完毕，打开网址：主机:7079/ui/#/node<br>默认登录账号密码：<a href="mailto:admin@admin.com" target="_blank" rel="noopener">admin@admin.com</a>/admin</p>
 <p>#4 邮件报警</p>
