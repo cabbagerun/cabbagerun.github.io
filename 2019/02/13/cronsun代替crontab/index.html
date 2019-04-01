@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="小白菜别跑的博客">
 <meta property="og:description" content="分布式任务系统cronsun代替原始的crontab">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-29T08:59:07.305Z">
+<meta property="og:updated_time" content="2019-04-01T01:57:12.672Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cronsun代替crontab">
 <meta name="twitter:description" content="分布式任务系统cronsun代替原始的crontab">
@@ -196,15 +196,20 @@
 <p>cronnode: 负责调度和执行任务的<br>cronweb: 负责管理任务、查看任务执行日志的<br>conf: db/web/sercuriry等配置文件</p>
 </blockquote>
 <p>#3 使用</p>
-<p>##3.1 启动</p>
-<blockquote>
-<p>启动etcd服务：./etcd<br>启动mongodb服务：./mongod<br>启动cronsun节点：./cronnode -conf conf/base.json<br>启动cronweb(管理脚本的界面)：./cronweb -conf conf/base.json</p>
-</blockquote>
+<p>##3.1 启动配置</p>
 <p>启动cronsun前先修改conf下的db.conf、etcd.conf配置，默认配置为本地。</p>
 <p>db.conf配置(Hosts)：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"Hosts"</span>: [</span><br><span class="line">    <span class="string">"127.0.0.1:27017"</span></span><br><span class="line">  ],</span><br><span class="line">  <span class="string">"Database"</span>: <span class="string">"cronsun"</span>,</span><br><span class="line">  <span class="string">"#AuthSource"</span>: <span class="string">"AuthSource Specify the database name associated with the user’s credentials."</span>,</span><br><span class="line">  <span class="string">"#AuthSource"</span>: <span class="string">"AuthSource defaults to the cronsun's Database."</span>,</span><br><span class="line">  <span class="string">"#AuthSource"</span>: <span class="string">"If connect mongodb like './bin/mongo mytest -u test -p 123 --authenticationDatabase admin' "</span>,</span><br><span class="line">  <span class="string">"#AuthSource"</span>: <span class="string">"the AuthSource is 'admin'. "</span>,</span><br><span class="line">  <span class="string">"AuthSource"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="string">"UserName"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="string">"Password"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="string">"#Timeout"</span>: <span class="string">"connect timeout duration/second"</span>,</span><br><span class="line">  <span class="string">"Timeout"</span>: 15</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>etcd.conf配置(Endpoints)：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="string">"Endpoints"</span>:[</span><br><span class="line">        <span class="string">"http://127.0.0.1:2379"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="string">"Username"</span>:<span class="string">""</span>,</span><br><span class="line">    <span class="string">"Password"</span>:<span class="string">""</span>,</span><br><span class="line">    <span class="string">"#DialTimeout"</span>:<span class="string">"单位秒"</span>,</span><br><span class="line">    <span class="string">"DialTimeout"</span>: 2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##3.2 临时启动</p>
+<blockquote>
+<p>启动etcd服务：./etcd<br>启动mongodb服务：./mongod<br>启动cronsun节点：./cronnode -conf conf/base.json<br>启动cronweb(管理脚本的界面)：./cronweb -conf conf/base.json</p>
+</blockquote>
+<p>##3.3 后台启动</p>
+<blockquote>
+<p>启动etcd服务：nohup ./etcd &gt; /dev/null 2&gt;&amp;1 &amp;<br>启动mongodb服务：./mongod -dbpath /data/db -logpath ./logs/mongo.log -logappend -fork -port 27017<br>启动cronsun节点：nohup ./cronnode -conf conf/base.json &gt; /dev/null 2&gt;&amp;1 &amp;<br>启动cronweb(管理脚本的界面)：nohup ./cronweb -conf conf/base.json &gt; /dev/null 2&gt;&amp;1 &amp;</p>
+</blockquote>
 <p>全部服务启动完毕，打开网址：主机:7079/ui/#/node<br>默认登录账号密码：<a href="mailto:admin@admin.com" target="_blank" rel="noopener">admin@admin.com</a>/admin</p>
 <p>#4 邮件报警</p>
 <p>编辑mail.json配置：<br>注意：#代表已注释，网上说LocalName建议留空(自行测试)</p>
