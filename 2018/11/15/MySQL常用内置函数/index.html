@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="小白菜别跑的博客">
 <meta property="og:description" content="MySQL常用内置函数">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-15T04:12:04.042Z">
+<meta property="og:updated_time" content="2019-05-07T06:53:34.903Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL常用内置函数">
 <meta name="twitter:description" content="MySQL常用内置函数">
@@ -183,7 +183,8 @@
 <h2 id="2-4-复合数据"><a href="#2-4-复合数据" class="headerlink" title="2.4 复合数据"></a>2.4 复合数据</h2><blockquote>
 <p>count(),sum(),max(),min(),avg()</p>
 </blockquote>
-
+<h2 id="2-5-部分实例"><a href="#2-5-部分实例" class="headerlink" title="2.5 部分实例"></a>2.5 部分实例</h2><h3 id="2-5-1-去掉小数点后面的多余的尾0"><a href="#2-5-1-去掉小数点后面的多余的尾0" class="headerlink" title="2.5.1 去掉小数点后面的多余的尾0"></a>2.5.1 去掉小数点后面的多余的尾0</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select 0+convert(<span class="string">'0.01000'</span>, char);	<span class="comment">#0.01</span></span><br><span class="line">select 0+cast(<span class="string">'0.01000'</span> as char);	<span class="comment">#0.01</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-5-2-保留小数点后几位"><a href="#2-5-2-保留小数点后几位" class="headerlink" title="2.5.2 保留小数点后几位"></a>2.5.2 保留小数点后几位</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">selece convert(<span class="string">'0.01000'</span>, decimal(9,3));	<span class="comment">#0.010</span></span><br></pre></td></tr></table></figure>
       
 
       
@@ -434,14 +435,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据安全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Github</a>
               </li>
              
@@ -455,6 +448,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据安全</a>
               </li>
              
               <li class="article-tag-list-item">
