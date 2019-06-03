@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="小白菜别跑的博客">
 <meta property="og:description" content="php性能优化相关总结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-03T08:00:27.134Z">
+<meta property="og:updated_time" content="2019-06-03T08:03:31.892Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php性能优化">
 <meta name="twitter:description" content="php性能优化相关总结">
@@ -195,7 +195,7 @@
 </li>
 <li>判断字符串是否达到一定长度是使用isset($str{5})代替strlen()，因isset不需要去查找字符串和字符串小写化；</li>
 <li>$i++的效率慢于++$i;</li>
-<li>在编程的时候不要一味的将操作方法细化，需要考虑哪些才是真正可以服用的部分将其独立出去；</li>
+<li>在编程的时候不要一味的将操作方法细化，需要考虑哪些才是真正可以复用的部分将其独立出去；</li>
 <li>使用file_get_contents()代替file、fopen、feof、fgets等文件操作方法，前者效率更高；</li>
 <li>尽量少的使用mysql中的insert、update操作，或insert、update、delete大的操作，因其可能导致表锁或行锁，影响程序效率；</li>
 </ol>
