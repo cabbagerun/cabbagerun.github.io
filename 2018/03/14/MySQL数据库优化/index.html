@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="小白菜别跑的博客">
 <meta property="og:description" content="php性能优化相关总结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-11-15T03:00:30.615Z">
+<meta property="og:updated_time" content="2019-06-03T07:42:13.235Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据库优化">
 <meta name="twitter:description" content="php性能优化相关总结">
@@ -183,7 +183,7 @@
 </ul>
 </blockquote>
 </li>
-<li>nnodb_buffer_pool_size //用于设置innodb存储引擎的索引及数据块的内存大小，返回的数据或者索引都会经过这里，应尽可能将此参数设大，让数据几索引尽可能缓存到此区域</li>
+<li>innodb_buffer_pool_size //用于设置innodb存储引擎的索引及数据块的内存大小，返回的数据或者索引都会经过这里，应尽可能将此参数设大，让数据几索引尽可能缓存到此区域</li>
 </ol>
 </blockquote>
 <h1 id="3-表结构优化"><a href="#3-表结构优化" class="headerlink" title="3. 表结构优化"></a>3. 表结构优化</h1><h2 id="3-1-概述"><a href="#3-1-概述" class="headerlink" title="3.1 概述"></a>3.1 概述</h2><p>MySQL数据库是基于行(row)存储，数据库操作IO的时候是以page(block)块的方式操作，最为耗时的就是IO操作，其中大部分的IO都消耗在读写上，因此应尽量减少IO读写，数据表的设计也是至关重要的，数据表的设计主要体现在数据类型的使用上了。</p>
@@ -208,7 +208,7 @@
 </li>
 <li>时间类型<blockquote>
 <ul>
-<li>尽量使用timestamp类型，因为存储空间只需要datetime类型的一般大小；</li>
+<li>尽量使用timestamp类型，因为存储空间只需要datetime类型的一半大小；</li>
 <li>对于只需要存储年月日的时间应使用date类型，其存储的空间比timestamp类型小的多；</li>
 <li>时间不建议使用int类型，不直观(对开发者不友好)；</li>
 </ul>
@@ -251,7 +251,7 @@
 <li>必须对字段设置comment备注信息，这些信息对开发来说时非常重要的；</li>
 </ol>
 </blockquote>
-<h1 id="4-索引优化"><a href="#4-索引优化" class="headerlink" title="4. 索引优化"></a>4. 索引优化</h1><h2 id="4-1-概述"><a href="#4-1-概述" class="headerlink" title="4.1 概述"></a>4.1 概述</h2><p>MySQL数据库中的索引就好比去图书馆借一本书《java EE》，例如：”图书馆=&gt;计算机=&gt;编程=&gt;《java EE》”，这玩意就好像目录一样可以更快的帮你找到需要的东西，类似索引也是如此。</p>
+<h1 id="4-索引优化"><a href="#4-索引优化" class="headerlink" title="4. 索引优化"></a>4. 索引优化</h1><h2 id="4-1-概述"><a href="#4-1-概述" class="headerlink" title="4.1 概述"></a>4.1 概述</h2><p>MySQL数据库中的索引就好比去图书馆借一本书《PHP进阶》，例如：”图书馆=&gt;计算机=&gt;编程语言=&gt;《PHP进阶》”，这玩意就好像目录一样可以更快的帮你找到需要的东西，类似索引也是如此。</p>
 <h2 id="4-2-索引的创建"><a href="#4-2-索引的创建" class="headerlink" title="4.2 索引的创建"></a>4.2 索引的创建</h2><blockquote>
 <ol>
 <li>在经常搜索的字段上；</li>
@@ -529,6 +529,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Github</a>
               </li>
              
@@ -537,19 +549,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据安全</a>
               </li>
              
               <li class="article-tag-list-item">
