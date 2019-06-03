@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="小白菜别跑的博客">
 <meta property="og:description" content="php性能优化相关总结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-03T07:43:30.762Z">
+<meta property="og:updated_time" content="2019-06-03T07:46:06.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据库优化">
 <meta name="twitter:description" content="php性能优化相关总结">
@@ -254,12 +254,8 @@
 <h1 id="4-索引优化"><a href="#4-索引优化" class="headerlink" title="4. 索引优化"></a>4. 索引优化</h1><h2 id="4-1-概述"><a href="#4-1-概述" class="headerlink" title="4.1 概述"></a>4.1 概述</h2><p>MySQL数据库中的索引就好比去图书馆借一本书《PHP进阶》，例如：”图书馆=&gt;计算机=&gt;编程语言=&gt;《PHP进阶》”，这玩意就好像目录一样可以更快的帮你找到需要的东西，类似索引也是如此。</p>
 <h2 id="4-2-索引的创建"><a href="#4-2-索引的创建" class="headerlink" title="4.2 索引的创建"></a>4.2 索引的创建</h2><blockquote>
 <ol>
-<li>在经常搜索的字段上；</li>
 <li>作为主键/外键的列上，建表时应对主键设置primary key(id)/key id(id)；</li>
-<li>经常用在join连接的字段上；</li>
-<li>经常需要根据范围查找的字段上；</li>
-<li>经常需要排序的字段上；</li>
-<li>经常使用在where字句中的字段；</li>
+<li>经常使用在where/group by/order by字句中的字段；</li>
 </ol>
 </blockquote>
 <h2 id="4-3-索引会失效"><a href="#4-3-索引会失效" class="headerlink" title="4.3 索引会失效"></a>4.3 索引会失效</h2><blockquote>
