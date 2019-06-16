@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="php性能优化相关总结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-03T07:50:33.916Z">
+<meta property="og:updated_time" content="2019-06-16T03:30:40.890Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据库优化">
 <meta name="twitter:description" content="php性能优化相关总结">
@@ -262,7 +262,7 @@
 <ol>
 <li>没有查询条件，或者查询条件没有建立索引；</li>
 <li>对索引列进行运算导致索引失效,我所指的对索引列进行运算包括(+，-，*，/，! 等)；</li>
-<li>索引无法存储null值；</li>
+<li>索引无法存储null值，在索引列对null进行判断时索引失效；</li>
 <li>不适合键值较少的列(重复数据较多的列)；</li>
 <li>前导模糊查询不能利用索引(like ‘%XX’或者like ‘%XX%’)；</li>
 <li>如果条件中有or，即使其中有条件带索引也不会使用(这也是为什么尽量少用or的原因)，要想使用or，又想让索引生效，只能将or条件中的每个列都加上索引；</li>
@@ -525,14 +525,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">PHP</a>
               </li>
              
@@ -545,6 +537,26 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Nginx</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
@@ -554,10 +566,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
               <li class="article-tag-list-item">
