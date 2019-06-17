@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="php性能优化相关总结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-16T03:30:40.890Z">
+<meta property="og:updated_time" content="2019-06-16T03:33:38.927Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL数据库优化">
 <meta name="twitter:description" content="php性能优化相关总结">
@@ -261,9 +261,9 @@
 <h2 id="4-3-索引会失效"><a href="#4-3-索引会失效" class="headerlink" title="4.3 索引会失效"></a>4.3 索引会失效</h2><blockquote>
 <ol>
 <li>没有查询条件，或者查询条件没有建立索引；</li>
-<li>对索引列进行运算导致索引失效,我所指的对索引列进行运算包括(+，-，*，/，! 等)；</li>
+<li>对索引列进行运算导致索引失效，对索引列进行运算包括(+，-，*，/，! 等)；</li>
 <li>索引无法存储null值，在索引列对null进行判断时索引失效；</li>
-<li>不适合键值较少的列(重复数据较多的列)；</li>
+<li>不适合键值较少的列(重复数据较多的列)，如status是否的状态；</li>
 <li>前导模糊查询不能利用索引(like ‘%XX’或者like ‘%XX%’)；</li>
 <li>如果条件中有or，即使其中有条件带索引也不会使用(这也是为什么尽量少用or的原因)，要想使用or，又想让索引生效，只能将or条件中的每个列都加上索引；</li>
 <li>对于多列索引(复合索引)，不是使用的第一部分，则不会使用索引，应按索引顺序使用，即使只使用第一个也会使用索引的；</li>
