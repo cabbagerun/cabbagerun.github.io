@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="Lnmp集成开发环境">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-16T10:32:03.734Z">
+<meta property="og:updated_time" content="2019-08-30T03:03:51.615Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lnmp集成开发环境">
 <meta name="twitter:description" content="Lnmp集成开发环境">
@@ -169,7 +169,35 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-VirsualBox安装"><a href="#1-VirsualBox安装" class="headerlink" title="1. VirsualBox安装"></a>1. VirsualBox安装</h1><h1 id="2-CentOS安装"><a href="#2-CentOS安装" class="headerlink" title="2. CentOS安装"></a>2. CentOS安装</h1><h1 id="3-OneinStack集成安装"><a href="#3-OneinStack集成安装" class="headerlink" title="3. OneinStack集成安装"></a>3. OneinStack集成安装</h1>
+        <h1 id="1-Lnmp集成开发环境"><a href="#1-Lnmp集成开发环境" class="headerlink" title="1. Lnmp集成开发环境"></a>1. Lnmp集成开发环境</h1><p>VirsualBox+Centos7+OneinStack安装笔记；大多数程序员编写程序都是windows下完成，但运行环境却比较杂乱，有一键集成的wamp/wnmp等，版本参差不齐，就我接触的项目基本是运行在Linux上，开发和生产的环境保持一致也避免了上线不兼容等问题。</p>
+<a id="more"></a>
+<h1 id="2-VirsualBox安装"><a href="#2-VirsualBox安装" class="headerlink" title="2. VirsualBox安装"></a>2. VirsualBox安装</h1><h2 id="2-1-下载地址"><a href="#2-1-下载地址" class="headerlink" title="2.1 下载地址"></a>2.1 下载地址</h2><p><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank" rel="noopener">https://www.virtualbox.org/wiki/Downloads</a></p>
+<h2 id="2-2-意点："><a href="#2-2-意点：" class="headerlink" title="2.2 意点："></a>2.2 意点：</h2><ol>
+<li><p>安装最好自定义，可自行选择释放盘，默认是C盘</p>
+</li>
+<li><p>安装时会有部分依赖软件需要安装，如不安装可能会对网络使用有影响</p>
+</li>
+</ol>
+<h1 id="3-CentOS安装"><a href="#3-CentOS安装" class="headerlink" title="3. CentOS安装"></a>3. CentOS安装</h1><h2 id="3-1-下载地址"><a href="#3-1-下载地址" class="headerlink" title="3.1 下载地址"></a>3.1 下载地址</h2><p><a href="http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1810.iso" target="_blank" rel="noopener">http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1810.iso</a></p>
+<p>为了节省可用的有限带宽，请选择合适的地址下载</p>
+<h2 id="3-2-安装注意点"><a href="#3-2-安装注意点" class="headerlink" title="3.2 安装注意点"></a>3.2 安装注意点</h2><ol>
+<li><p>新建，类型：Linux，版本：Red Hat 64-bit。<br>ps：可能有的电脑会没有Red Hat 64-bit，这里是因为CPU没有开启虚拟化<br>解决办法:开机F10进入BIOS–&gt;Advanced–&gt;找到Virtualization Technology–&gt;打钩–&gt;save–&gt;yes。</p>
+</li>
+<li><p>设置内存大小，推荐1G。</p>
+</li>
+<li><p>创建虚拟硬盘，选择现在创建虚拟硬盘。</p>
+</li>
+<li><p>选择虚拟硬盘文件类型为VDI类型。</p>
+</li>
+<li><p>虚拟硬盘文件的存放方式，如果需要较好的性能，硬盘空间够用就选择固定大小。如果你硬盘空间比较紧张就选择动态分配。</p>
+</li>
+<li><p>选择虚拟硬盘的文件位置和大小，默认C盘，推荐8G，具体还需根据自己情况选择大小。</p>
+</li>
+<li><p>启动。</p>
+</li>
+</ol>
+<h1 id="4-OneinStack集成安装"><a href="#4-OneinStack集成安装" class="headerlink" title="4. OneinStack集成安装"></a>4. OneinStack集成安装</h1><p><a href="https://oneinstack.com/install/" target="_blank" rel="noopener">https://oneinstack.com/install/</a></p>
+
       
 
       
@@ -432,14 +460,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据安全</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Github</a>
               </li>
              
@@ -448,7 +468,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+                <a href="javascript:void(0)" class="js-tag color4">PHP</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据安全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -464,15 +488,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">node.js</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
