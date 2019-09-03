@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="www.jr968.cn">
-  <title>Redis小结 | JR968的博客</title>
+  <title>MinDoc接口文档管理系统 | JR968的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Redis小结">
-<meta name="keywords" content="Redis">
+  <meta name="description" content="MinDoc接口文档管理系统">
+<meta name="keywords" content="PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Redis小结">
-<meta property="og:url" content="www.jr968.cn/2019/03/18/Redis小结/index.html">
+<meta property="og:title" content="MinDoc接口文档管理系统">
+<meta property="og:url" content="www.jr968.cn/2019/09/03/MinDoc接口文档管理系统/index.html">
 <meta property="og:site_name" content="JR968的博客">
-<meta property="og:description" content="Redis小结">
+<meta property="og:description" content="MinDoc接口文档管理系统">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-30T02:05:03.013Z">
+<meta property="og:updated_time" content="2019-09-03T08:02:42.751Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Redis小结">
-<meta name="twitter:description" content="Redis小结">
+<meta name="twitter:title" content="MinDoc接口文档管理系统">
+<meta name="twitter:description" content="MinDoc接口文档管理系统">
   
     <link rel="alternative" href="/atom.xml" title="JR968的博客" type="application/atom+xml">
   
@@ -149,61 +149,35 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Redis小结" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MinDoc接口文档管理系统" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Redis小结
+      MinDoc接口文档管理系统
     </h1>
   
 
         
-        <a href="/2019/03/18/Redis小结/" class="archive-article-date">
-  	<time datetime="2019-03-18T02:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-18</time>
+        <a href="/2019/09/03/MinDoc接口文档管理系统/" class="archive-article-date">
+  	<time datetime="2019-09-03T06:12:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>Reids数据类型及应用场景、使用心得(策略)。</p>
+        <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><p>MinDoc 是一款针对IT团队开发的简单好用的文档管理系统。可以用来储存日常接口文档，数据库字典，手册说明等文档。内置项目管理，用户管理，权限管理等功能，能够满足大部分中小团队的文档管理需求。</p>
 <a id="more"></a>
-<h1 id="2-数据类型及应用场景"><a href="#2-数据类型及应用场景" class="headerlink" title="2. 数据类型及应用场景"></a>2. 数据类型及应用场景</h1><h2 id="2-1-String-字符串"><a href="#2-1-String-字符串" class="headerlink" title="2.1 String(字符串)"></a>2.1 String(字符串)</h2><p>String为简单的Key-Value形式存储的变量，Value支持数值和字符串形式。</p>
-<p>应用场景</p>
-<p>1、简单类型的字符串/数值/jison数据<br>2、针对对某些业务设置相关的锁机制</p>
-<h2 id="2-2-Hash-字典"><a href="#2-2-Hash-字典" class="headerlink" title="2.2 Hash(字典)"></a>2.2 Hash(字典)</h2><p>Hash存储是键值对的Key-Hash形式，而Hash又是一个k-v的结构，可对Hash里某个k进行操作。</p>
-<p>应用场景</p>
-<p>1、存储用户信息(用户名、头像、年龄，生日、粉丝数、关注数等)<br>2、存储文章点赞、收藏、评论数等相关信息</p>
-<h2 id="2-3-List-列表"><a href="#2-3-List-列表" class="headerlink" title="2.3 List(列表)"></a>2.3 List(列表)</h2><p>应用场景</p>
-<p>1、消息队列(先进先出)<br>2、列表数据(最新数据排行，存储数据id，并将id对应的详情保存至Hash/集合/字符串json中，针对文章类的资讯信息推荐使用字符串json或集合)</p>
-<h2 id="2-4-Set-集合"><a href="#2-4-Set-集合" class="headerlink" title="2.4 Set(集合)"></a>2.4 Set(集合)</h2><p>存储无序去重的数据集合，并且还提供了求交集、并集、差集等操作。</p>
-<p>应用场景</p>
-<p>1、用户关注、收藏、点赞列表，可通过交集、并集、差集得到好友关系、共同喜好等数据</p>
-<h2 id="2-5-Sorted-Set-有序集合"><a href="#2-5-Sorted-Set-有序集合" class="headerlink" title="2.5 Sorted Set(有序集合)"></a>2.5 Sorted Set(有序集合)</h2><p>Sorted set可以通过用户额外提供一个优先级(score)的参数来为成员排序，并且是不重复的。</p>
-<p>应用场景</p>
-<p>1、如直播送礼/收益排行榜、主播权重列表、学生排名列表等</p>
-<h2 id="2-6-Pub-Sub-发布订阅"><a href="#2-6-Pub-Sub-发布订阅" class="headerlink" title="2.6 Pub/Sub(发布订阅)"></a>2.6 Pub/Sub(发布订阅)</h2><p>可以选择对某个Key进行订阅，一旦这个key发布了一些消息，则所有订阅了这个Key的对象就可以收到这个消息。</p>
-<p>应用场景</p>
-<p>1、 主要可以用在实时消息系统上，例如聊天</p>
-<h2 id="2-7-Transactions-事务"><a href="#2-7-Transactions-事务" class="headerlink" title="2.7 Transactions(事务)"></a>2.7 Transactions(事务)</h2><p>redis事务一次执行多个命令，通过提供了打包执行的功能，即这个包里面的所有命令必须要一起执行，此外还可以锁定某个Key，在打包执行命令时如果检测到这个Key发生了变化，则直接回滚，并且事务执行过程中不受其他客户端影响。</p>
-<p>常用命令：</p>
-<blockquote>
-<p>DISCARD：取消事物，放弃执行事物块内的所有命令<br>EXEC：执行事物块内的所有命令<br>MULTI：标记一个事物块的开始<br>UNWATCH：取消watch命令对所有key的监控<br>WATCH：监控一个或多个key，如果在事物执行之前(EXEC)，key被其他命令改动，那么事物将被打断</p>
-</blockquote>
-<h1 id="3-使用心得-策略"><a href="#3-使用心得-策略" class="headerlink" title="3. 使用心得(策略)"></a>3. 使用心得(策略)</h1><h2 id="3-1-过期策略以及内存淘汰机制"><a href="#3-1-过期策略以及内存淘汰机制" class="headerlink" title="3.1 过期策略以及内存淘汰机制"></a>3.1 过期策略以及内存淘汰机制</h2><ul>
-<li><p>过期策略采用定期删除+惰性删除策略：<br>1、定期删除：redis默认每隔0.1s随机检查是否有过期的key，有过期key则删除<br>2、惰性删除：当获取某个key的时，redis会检查一下这个key是否设置了过期时间，是否过期，过期则删除</p>
-</li>
-<li><p>内存淘汰机制一般在内存不足的情况下激活，需配置redis.conf下maxmemory-policy选项，推荐使用设置值为allkeys-lru：<br>1、allkeys-lru：当内存不足以容纳新写入数据时，清理最近最少使用的key。</p>
-</li>
-</ul>
-<h2 id="3-2-缓存和数据库双写一致性-读写操作"><a href="#3-2-缓存和数据库双写一致性-读写操作" class="headerlink" title="3.2 缓存和数据库双写一致性(读写操作)"></a>3.2 缓存和数据库双写一致性(读写操作)</h2><p>1、先更新数据库<br>2、再删除缓存</p>
-<h2 id="3-3-缓存雪崩"><a href="#3-3-缓存雪崩" class="headerlink" title="3.3 缓存雪崩"></a>3.3 缓存雪崩</h2><p>1、即缓存同一时间大面积的失效，这时又出现大批量的请求直接访问到数据库上，从而导致数据库连接异常</p>
-<h2 id="3-4-瓶颈-网络、内存"><a href="#3-4-瓶颈-网络、内存" class="headerlink" title="3.4 瓶颈(网络、内存)"></a>3.4 瓶颈(网络、内存)</h2><p>1、受服务器地域影响(远程链接redis服务器)，可使用redis管道家快执行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"><span class="variable">$mode</span> = Redis::PIPELINE;</span><br><span class="line"><span class="variable">$key</span> = <span class="string">'pipeline_key'</span>;</span><br><span class="line"><span class="variable">$value</span> = <span class="string">'test'</span>;</span><br><span class="line"><span class="variable">$redis</span>-&gt;muti(<span class="variable">$mode</span>)-&gt;get(<span class="variable">$key</span>)-&gt;<span class="built_in">set</span>(<span class="variable">$key</span>, <span class="variable">$value</span>)-&gt;<span class="built_in">exec</span>()；</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>2、因redis的数据放在内存里，存放数据量的多少取决于内存的多少</p>
+<h1 id="2-下载"><a href="#2-下载" class="headerlink" title="2. 下载"></a>2. 下载</h1><p>地址：<a href="https://github.com/lifei6671/mindoc/releases" target="_blank" rel="noopener">https://github.com/lifei6671/mindoc/releases</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建目录</span></span><br><span class="line">mkdir -m 755 /data/mindoc &amp;&amp; <span class="built_in">cd</span> /data/mindoc</span><br><span class="line"></span><br><span class="line"><span class="comment">#下载</span></span><br><span class="line">wget wget https://github.com/lifei6671/mindoc/releases/download/v2.0/mindoc_linux_amd64.zip</span><br><span class="line"></span><br><span class="line"><span class="comment">#解压</span></span><br><span class="line">tar -xzvf mindoc_linux_amd64.tar.gz</span><br><span class="line"><span class="comment">#或</span></span><br><span class="line">unzip mindoc_linux_amd64.zip</span><br></pre></td></tr></table></figure>
+<h1 id="3-配置数据库"><a href="#3-配置数据库" class="headerlink" title="3. 配置数据库"></a>3. 配置数据库</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">vi conf/app.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">#mysql配置如下</span></span><br><span class="line"><span class="comment">#db_adapter=mysql</span></span><br><span class="line"><span class="comment">#db_host=127.0.0.1</span></span><br><span class="line"><span class="comment">#db_port=3306</span></span><br><span class="line"><span class="comment">#db_database=mindoc_db</span></span><br><span class="line"><span class="comment">#db_username=数据库用户名</span></span><br><span class="line"><span class="comment">#db_password=数据库用户密码</span></span><br></pre></td></tr></table></figure>
+<h1 id="4-启动"><a href="#4-启动" class="headerlink" title="4. 启动"></a>4. 启动</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建数据库</span></span><br><span class="line">CREATE DATABASE mindoc_db  DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci;</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装</span></span><br><span class="line">./mindoc_linux_amd64 install</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动</span></span><br><span class="line">./mindoc_linux_amd64</span><br><span class="line"></span><br><span class="line"><span class="comment">#后台启动</span></span><br><span class="line">nohup ./mindoc_linux_amd64 &gt; /dev/null 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+<p>访问<a href="http://IP:8181可以打开了，默认8181端口，默认用户名为admin，密码123456。" target="_blank" rel="noopener">http://IP:8181可以打开了，默认8181端口，默认用户名为admin，密码123456。</a></p>
+<h1 id="5-Nginx配置代理"><a href="#5-Nginx配置代理" class="headerlink" title="5. Nginx配置代理"></a>5. Nginx配置代理</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#创建配置</span></span><br><span class="line">vi /usr/<span class="built_in">local</span>/nginx/conf/vhost/mindoc.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">#配置信息如下</span></span><br><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#此处应该配置你的域名：</span></span><br><span class="line">    server_name  域名;</span><br><span class="line"></span><br><span class="line">    charset utf-8;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#此处配置你的访问日志，请手动创建该目录：</span></span><br><span class="line">    access_log  /var/<span class="built_in">log</span>/nginx/webhook.iminho.me/access.log;</span><br><span class="line"></span><br><span class="line">    location / &#123;</span><br><span class="line">        try_files /_not_exists_ @backend;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这里为具体的服务代理配置</span></span><br><span class="line">    location @backend &#123;</span><br><span class="line">        proxy_set_header X-Forwarded-For <span class="variable">$remote_addr</span>;</span><br><span class="line">        proxy_set_header Host            <span class="variable">$http_host</span>;</span><br><span class="line">        proxy_set_header   X-Forwarded-Proto <span class="variable">$scheme</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">#此处配置 MinDoc 程序的地址和端口号</span></span><br><span class="line">        proxy_pass http://127.0.0.1:8181;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>详细配置可参考：<a href="https://www.iminho.me/wiki/docs/mindoc/mindoc-summary.md" target="_blank" rel="noopener">https://www.iminho.me/wiki/docs/mindoc/mindoc-summary.md</a></p>
 
       
 
@@ -248,7 +222,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
         		</li>
       		
 		</ul>
@@ -304,7 +278,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:www.jr968.cn/2019/03/18/Redis小结/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:www.jr968.cn/2019/09/03/MinDoc接口文档管理系统/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -318,18 +292,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/10/Lnmp集成开发环境/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Lnmp集成开发环境
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/02/13/cronsun代替crontab/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">cronsun代替crontab</div>
+    <a href="/2019/08/29/防火墙开放端口/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">防火墙开放端口</div>
       <i class="icon-circle-right"></i>
     </a>
   
