@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="www.jr968.cn">
-  <title>Git安装与使用 | JR968的博客</title>
+  <title>MySQL数据备份 | JR968的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Git安装与使用入门教程">
-<meta name="keywords" content="Github,Git">
+  <meta name="description" content="MySQL数据备份">
+<meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Git安装与使用">
-<meta property="og:url" content="www.jr968.cn/2018/08/25/Git安装与使用/index.html">
+<meta property="og:title" content="MySQL数据备份">
+<meta property="og:url" content="www.jr968.cn/2019/09/07/MySQL数据备份/index.html">
 <meta property="og:site_name" content="JR968的博客">
-<meta property="og:description" content="Git安装与使用入门教程">
+<meta property="og:description" content="MySQL数据备份">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-08T04:08:22.853Z">
+<meta property="og:updated_time" content="2019-09-07T10:48:34.403Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Git安装与使用">
-<meta name="twitter:description" content="Git安装与使用入门教程">
+<meta name="twitter:title" content="MySQL数据备份">
+<meta name="twitter:description" content="MySQL数据备份">
   
     <link rel="alternative" href="/atom.xml" title="JR968的博客" type="application/atom+xml">
   
@@ -149,81 +149,39 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Git安装与使用" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MySQL数据备份" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Git安装与使用
+      MySQL数据备份
     </h1>
   
 
         
-        <a href="/2018/08/25/Git安装与使用/" class="archive-article-date">
-  	<time datetime="2018-08-25T12:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-25</time>
+        <a href="/2019/09/07/MySQL数据备份/" class="archive-article-date">
+  	<time datetime="2019-09-07T03:42:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Git是一些命令行工具的集合，可以用来跟踪、记录文件的变动，经常用于开发源代码，可以对源码进行旧版本恢复、比对、分析、合并等等，这个过程被称之为版本控制，同svn等，也是开发中的一个重要协作工具，对于一名程序员来说掌握Git的使用是必然的，因此也想总结下以往自己是如何使用Git的。</p>
+        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>生产环境服务器故障、软件故障、操作失误、恶意攻击等都有可能造成数据丢失，因此提前备份一份数据时相对比较安全的策略，但数据备份也可能不完全，或出现脏数，就看是否能容忍这些非完美数据；这里主要记录下逻辑备份和热备份两种方式。</p>
 <a id="more"></a>
-<h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><p>具体的安装过程就不多啰嗦，自行根据不同版本进行安装，比较简单。</p>
-<h2 id="2-1-下载地址"><a href="#2-1-下载地址" class="headerlink" title="2.1 下载地址"></a>2.1 下载地址</h2><p><a href="https://gitforwindows.org/" target="_blank" rel="noopener">https://gitforwindows.org/</a></p>
-<h2 id="2-2-安装教程"><a href="#2-2-安装教程" class="headerlink" title="2.2 安装教程"></a>2.2 安装教程</h2><p><a href="https://blog.csdn.net/sishen47k/article/details/80211002" target="_blank" rel="noopener">https://blog.csdn.net/sishen47k/article/details/80211002</a></p>
-<h1 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h1><h3 id="3-1-配置"><a href="#3-1-配置" class="headerlink" title="3.1 配置"></a>3.1 配置</h3><p>安装完git，首先要的是你的用户名及邮箱，打开终端(右键或home键下查找)，执行以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"My Name"</span> </span><br><span class="line">git config --global user.email <span class="string">"My Email"</span></span><br></pre></td></tr></table></figure>
-<h3 id="3-2-创建版本库"><a href="#3-2-创建版本库" class="headerlink" title="3.2 创建版本库"></a>3.2 创建版本库</h3><p>创建版本库将在当前目录下生成一个.git的文件夹，相关的所有历史信息和配置都保存在此文件夹中，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
-<h3 id="3-3-检查状态"><a href="#3-3-检查状态" class="headerlink" title="3.3 检查状态"></a>3.3 检查状态</h3><p>检查当前版本库中的文件状态，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure>
-<h2 id="3-4-添加暂存区"><a href="#3-4-添加暂存区" class="headerlink" title="3.4 添加暂存区"></a>3.4 添加暂存区</h2><p>将本地修改添加到暂存区，可以指定某个文件添加，或使用”.”(或”*”)批量添加，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;文件&gt; <span class="comment">#指定文件</span></span><br><span class="line">git add . <span class="comment">#当前所有修改</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-5-提交版本库"><a href="#3-5-提交版本库" class="headerlink" title="3.5 提交版本库"></a>3.5 提交版本库</h2><p>将添加到暂存区的修改提交到版本库上，将在.git中记录相关版本信息，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m <span class="string">"自定义版本信息"</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-5-上传服务器"><a href="#3-5-上传服务器" class="headerlink" title="3.5 上传服务器"></a>3.5 上传服务器</h2><p>将本次提交上传至服务器上，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push</span><br></pre></td></tr></table></figure>
-<p>使用此命令有几种要注意的情况：<br>1.本地创建的版本库需要添加远程链接，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://github.com/xxx/my-project.git</span><br></pre></td></tr></table></figure>
-<p>然后在使用git push命令</p>
-<p>2.提交前远程仓库并没有你当前开发的分支，可根据提示创建并建立连接。</p>
-<h2 id="3-6-克隆仓库"><a href="#3-6-克隆仓库" class="headerlink" title="3.6 克隆仓库"></a>3.6 克隆仓库</h2><p>将已有的远程仓库克隆到本地，可指定克隆至哪个目录中，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> &lt;-b branch_name&gt; https://github.com/xxx/my-project.git &lt;路径&gt; <span class="comment">#&lt;-b branch_name&gt;可指定分支</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-7-更新仓库内容"><a href="#3-7-更新仓库内容" class="headerlink" title="3.7 更新仓库内容"></a>3.7 更新仓库内容</h2><p>将远程仓库中最新的内容更新至本地，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
-<h2 id="3-8-分支操作"><a href="#3-8-分支操作" class="headerlink" title="3.8 分支操作"></a>3.8 分支操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git branch <span class="comment">#查看本地分支</span></span><br><span class="line">git branch &lt;branch name&gt; <span class="comment">#创建分支</span></span><br><span class="line">git checkout branch-name <span class="comment">#切换分支</span></span><br><span class="line">git merge branch-name <span class="comment">#将branch-name分支下的最新内容合并到当前分支</span></span><br><span class="line">git checkout -b &lt;branch name&gt; <span class="comment">#创建并切换分支，即git branch &lt;branch name&gt;与git checkout branch-name结合使用</span></span><br></pre></td></tr></table></figure>
-<h2 id="3-8-删除本地分支和远程分支"><a href="#3-8-删除本地分支和远程分支" class="headerlink" title="3.8 删除本地分支和远程分支"></a>3.8 删除本地分支和远程分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git branch -d &lt;branch&gt; <span class="comment">#删除本地分支，-D强制删除</span></span><br><span class="line">git push origin --delete &lt;branch&gt; <span class="comment">#删除远程分支</span></span><br></pre></td></tr></table></figure>
-<h1 id="4-进阶"><a href="#4-进阶" class="headerlink" title="4. 进阶"></a>4. 进阶</h1><h2 id="4-1-查看日志"><a href="#4-1-查看日志" class="headerlink" title="4.1 查看日志"></a>4.1 查看日志</h2><p>查看所有历史提交和他们的id，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br><span class="line">git reflog <span class="comment">#关闭命令窗口后使用此命令</span></span><br><span class="line">git <span class="built_in">log</span> &lt;filename/dirname&gt; <span class="comment">#指定文件或目录</span></span><br><span class="line">git <span class="built_in">log</span> -p &lt;filename&gt; <span class="comment">#查看提交所带来的改动，可指定文件</span></span><br><span class="line">git blame &lt;filename&gt; <span class="comment">#查看文件的每个部分是谁修改的</span></span><br></pre></td></tr></table></figure>
-<h2 id="4-2-回滚操作"><a href="#4-2-回滚操作" class="headerlink" title="4.2 回滚操作"></a>4.2 回滚操作</h2><p>1.回滚某个文件到之前的版本，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout <span class="built_in">log</span>-id &lt;文件&gt;</span><br></pre></td></tr></table></figure>
-<p>2.回退至上个版本，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^ <span class="comment">#或HEAD~n 多个版本</span></span><br><span class="line">git reset --hard <span class="built_in">log</span>-id <span class="comment">#指定版本</span></span><br></pre></td></tr></table></figure>
-<p>3.撤销未提交修改<br>3.1 未提交版本，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;文件&gt;</span><br></pre></td></tr></table></figure>
-<p>3.2 提交暂存区，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD &lt;文件&gt;</span><br><span class="line">git checkout -- &lt;文件&gt;</span><br></pre></td></tr></table></figure>
-<p>3.3 提交版本库，执行命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^ <span class="comment">#或HEAD~n 多个版本</span></span><br><span class="line">git reset --hard <span class="built_in">log</span>-id <span class="comment">#指定版本</span></span><br></pre></td></tr></table></figure>
-<h2 id="4-3-保存工作现场"><a href="#4-3-保存工作现场" class="headerlink" title="4.3 保存工作现场"></a>4.3 保存工作现场</h2><p>当正在开发中时又新接一个急着处理的需求时，而且正在开发的东西有还没有完成，不利于提交代码时我们就需要保存当前的工作现场，处理完棘手需求后在还原继续。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git stash <span class="comment">#保存工作</span></span><br><span class="line">git stash list <span class="comment">#查看工作</span></span><br><span class="line">git stash pop <span class="comment">#还原最新的工作</span></span><br><span class="line">git stash pop stash@&#123;num&#125; <span class="comment">#指定还原工作</span></span><br><span class="line">git stash clear <span class="comment">#清空所有工作</span></span><br><span class="line">git stash drop stash@&#123;num&#125; <span class="comment">#删除指定工作</span></span><br></pre></td></tr></table></figure>
-<h1 id="5-文件忽略"><a href="#5-文件忽略" class="headerlink" title="5. 文件忽略"></a>5. 文件忽略</h1><p>忽略本地不想提交至版本库的文件，在根目录。</p>
-<h2 id="5-1-忽略新建文件-不存在版本库中"><a href="#5-1-忽略新建文件-不存在版本库中" class="headerlink" title="5.1 忽略新建文件(不存在版本库中)"></a>5.1 忽略新建文件(不存在版本库中)</h2><p>根目录创建.gitignore文件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">*.<span class="built_in">log</span> <span class="comment">#"*"代表模糊</span></span><br><span class="line">dir/ <span class="comment">#"/"代表目录</span></span><br><span class="line">file.txt <span class="comment">#忽略文件</span></span><br><span class="line">!filter.txt <span class="comment">#不忽略文件</span></span><br></pre></td></tr></table></figure>
-<h2 id="5-2-已存在版本库中的文件"><a href="#5-2-已存在版本库中的文件" class="headerlink" title="5.2 已存在版本库中的文件"></a>5.2 已存在版本库中的文件</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git update-index --assume-unchanged &lt;文件&gt;</span><br><span class="line">git rm [--cached] &lt;filename&gt; <span class="comment">#删除暂存区或分支上的文件，--cached不删除文件</span></span><br></pre></td></tr></table></figure>
-<h1 id="6-开发规范"><a href="#6-开发规范" class="headerlink" title="6. 开发规范"></a>6. 开发规范</h1><h2 id="6-1-注意事项"><a href="#6-1-注意事项" class="headerlink" title="6.1 注意事项"></a>6.1 注意事项</h2><blockquote>
-<p>1.为避免冲突开发时必须先拉取远程最新的代码 git pull。<br>2.本地开发时尽量对已开发完成或业务逻辑完整的代码及时更新到远程，避免对团队其他同事照成影响，减少冲突范围。<br>3.多敲多用，熟能生巧。</p>
+<h1 id="2-mysqldump逻辑备份"><a href="#2-mysqldump逻辑备份" class="headerlink" title="2. mysqldump逻辑备份"></a>2. mysqldump逻辑备份</h1><blockquote>
+<p>不需要额外安装插件<br>可以库表备份<br>可通过shell命令实现定时备份<br>不受数据库引擎限制，但备份时如果用户有操作，容易造成脏数据<br>只能全量备份，恢复的话只能覆盖原有数据，或者恢复到新的表中，再手动处理<br>单线程，数据量大时备份耗时较长，且锁表容易引对不支持事务的表造成影响</p>
 </blockquote>
-<h2 id="6-2-使用流程"><a href="#6-2-使用流程" class="headerlink" title="6.2 使用流程"></a>6.2 使用流程</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git status <span class="comment"># 1.查看修改状态</span></span><br><span class="line">git add &lt;文件&gt; <span class="comment"># 2.添加至暂存区</span></span><br><span class="line">git commit -m <span class="string">"msg"</span> <span class="comment"># 3.提交至版本库</span></span><br><span class="line">git push <span class="comment"># 4.推送至远程</span></span><br><span class="line">git merge branch-name <span class="comment"># 5.如有需要则合并分支</span></span><br><span class="line">git tag -a &lt;版本号&gt; -m <span class="string">"msg"</span> <span class="comment"># 6.打标签 发布版本 视情况使用 一般在较大版本改动的情况下使用</span></span><br><span class="line">git push origin &lt;版本号&gt; <span class="comment">#提交版本信息</span></span><br></pre></td></tr></table></figure>
-<h2 id="6-3-gitignore基础配置"><a href="#6-3-gitignore基础配置" class="headerlink" title="6.3 .gitignore基础配置"></a>6.3 .gitignore基础配置</h2><p>注：git克隆项目时不会下载.gitignore文件，需在第一次提交项目上仓库前手动添加并记录本地需要忽略的文件，开始创建项目的人将需要忽略的不用提交到仓库中，避免后续开发造成git库污染，开发组对忽略的配置文件手动copy就好了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.idea				<span class="comment">#IDE项目配置</span></span><br><span class="line">.gitignore</span><br><span class="line">/runtime/		<span class="comment">#需要忽略的文件</span></span><br></pre></td></tr></table></figure>
-<h1 id="7-开发流程"><a href="#7-开发流程" class="headerlink" title="7. 开发流程"></a>7. 开发流程</h1><h2 id="7-1-分支概述"><a href="#7-1-分支概述" class="headerlink" title="7.1 分支概述"></a>7.1 分支概述</h2><blockquote>
-<p>1.master：用于打包更新代码到生产服务器<br>2.master-hot-fix：此分支与master分支保持一致，用于紧急bug的处理，处理完成合并至release，测试确认无误后再合并到master、develop<br>3.release：用于打包更新代码到测试服务器，测试完成后合并至maser分支并发布生产<br>4.develop：开发公共分支，功能开发完成并本地测试完成后再合并至release分支<br>5.feature：本地个人开发分支，如hot-fix/xxx-test-feature，开发前先拉取develop分支最新代码(新功能开发前从master分支)</p>
+<h2 id="2-1-定时备份"><a href="#2-1-定时备份" class="headerlink" title="2.1 定时备份"></a>2.1 定时备份</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#A服务器备份路径</span></span><br><span class="line">backupdir=<span class="string">'/data/backup/mysql'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#A MySQL命令路径</span></span><br><span class="line">mysql_bin_dir=<span class="string">'/usr/local/mysql/bin'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#备份数据库</span></span><br><span class="line">databaseName=<span class="string">'dbname'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#备份文件名称前缀</span></span><br><span class="line">bakdatabaseName=<span class="string">'dbname_bak_'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#A服务器数据库用户</span></span><br><span class="line">mysqluser=<span class="string">'数据库用户名'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#A服务器数据库密码</span></span><br><span class="line">mysqlpwd=<span class="string">'数据库密码'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#B服务器用户</span></span><br><span class="line">targetServerUser=<span class="string">'服务器用户名'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#B服务器IP</span></span><br><span class="line">targetServerIP=<span class="string">'ip'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#B服务器备份路径</span></span><br><span class="line">targetpath=<span class="string">'/root/backup/mysql'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#当前日期</span></span><br><span class="line">time=` date +%Y%m%d `</span><br><span class="line"></span><br><span class="line"><span class="comment">#开始备份</span></span><br><span class="line"><span class="variable">$mysql_bin_dir</span>/mysqldump --socket=/tmp/mysql.sock -u <span class="variable">$mysqluser</span> -p<span class="variable">$mysqlpwd</span> <span class="variable">$databaseName</span> | gzip &gt; <span class="variable">$backupdir</span>/<span class="variable">$bakdatabaseName</span><span class="variable">$time</span>.sql.gz</span><br><span class="line"></span><br><span class="line"><span class="comment">#本地备份保存时间[-mtime +days]</span></span><br><span class="line">find <span class="variable">$backupdir</span> -name <span class="string">"<span class="variable">$bakdatabaseName</span>*.sql.gz"</span> -<span class="built_in">type</span> f -mtime +2 -<span class="built_in">exec</span> rm -f &#123;&#125; \; &gt; /dev/null 2&gt;&amp;1</span><br><span class="line"></span><br><span class="line"><span class="comment">#scp远程传输</span></span><br><span class="line">/usr/bin/scp <span class="variable">$backupdir</span>/<span class="variable">$bakdatabaseName</span><span class="variable">$time</span>.sql.gz <span class="variable">$targetServerUser</span>@<span class="variable">$targetServerIP</span>:<span class="variable">$targetpath</span>/<span class="variable">$bakdatabaseName</span><span class="variable">$time</span>.sql.gz</span><br></pre></td></tr></table></figure>
+<h1 id="3-XtraBackup热备份"><a href="#3-XtraBackup热备份" class="headerlink" title="3. XtraBackup热备份"></a>3. XtraBackup热备份</h1><blockquote>
+<p>支持innodb和xtradb数据库热备<br>属于物理备份，需要安装额外的插件，支持全量备份&amp;增量备份<br>备份、恢复速度快，支持远程、并发、限速备份，支持加密传输到本地<br>备份过程不会打断正在执行的事务<br>能够基于压缩等功能节约磁盘空间和流量<br>自动实现备份检验<br>还原速度快</p>
 </blockquote>
-
+<h2 id="3-1-安装"><a href="#3-1-安装" class="headerlink" title="3.1 安装"></a>3.1 安装</h2><p>下载xtrabackup：<a href="https://pan.baidu.com/s/1yEn6bgloHTw30Edn9BUE4Q" target="_blank" rel="noopener">https://pan.baidu.com/s/1yEn6bgloHTw30Edn9BUE4Q</a><br>下载libev依赖：<a href="https://pan.baidu.com/s/1PjO7CFwAa7Y1vvSUZk7weg" target="_blank" rel="noopener">https://pan.baidu.com/s/1PjO7CFwAa7Y1vvSUZk7weg</a> 提取码: 47ja</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装依赖</span></span><br><span class="line">rpm -ivh libev-4.15-1.el6.rf.x86_64.rpm</span><br><span class="line">yum install perl-DBI</span><br><span class="line">yum -y install perl perl-devel libaio libaio-devel perl-Time-HiRes perl-DBD-MySQL</span><br><span class="line">yum -y install perl-Digest-MD5</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装xtrabackup</span></span><br><span class="line">rpm -ivh percona-xtrabackup-24-2.4.10-1.el7.x86_64.rpm</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看安装是否成功</span></span><br><span class="line">xtrabackup -version</span><br></pre></td></tr></table></figure>
+<h2 id="3-1-相关命令"><a href="#3-1-相关命令" class="headerlink" title="3.1 相关命令"></a>3.1 相关命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#全量备份：innobackupex MySQL配置 用户 密码 [可指定数据库(否则全库)] 全量备份目录</span></span><br><span class="line">innobackupex --defaults-file=/etc/my.cnf --user=backup --password=123456 --databases=zabbix /data/backup/mysql</span><br><span class="line"></span><br><span class="line"><span class="comment">#增量备份：innobackupex MySQL配置 用户 密码 [可指定数据库(否则全库)] 增量备份目录 指定全量备份目录</span></span><br><span class="line">innobackupex --defaults-file=/etc/my.cnf --user=backup --password=123456 --databases=zabbix --incremental /data/backup/mysql/increment_data/ --incremental-basedir=/data/backup/mysql/全量备份时间目录/</span><br><span class="line"></span><br><span class="line"><span class="comment">#继续增量：innobackupex MySQL配置 用户 密码 [可指定数据库(否则全库)] 增量备份目录 指定增量备份或继续增量目录</span></span><br><span class="line">innobackupex --defaults-file=/etc/my.cnf --user=backup --password=123456 --databases=zabbix --incremental /data/backup/mysql/increment_data/ --incremental-basedir=/data/backup/mysql/increment_data/增量备份或继续增量时间目录/</span><br><span class="line"></span><br><span class="line"><span class="comment">#恢复前准备(prepare)全量备份</span></span><br><span class="line">innobackupex --apply-log --redo-only /data/backup/mysql/全量备份时间目录/</span><br><span class="line"></span><br><span class="line"><span class="comment">#恢复前准备(prepare)增量备份或继续增量</span></span><br><span class="line">innobackupex --apply-log --redo-only /data/backup/mysql/全量备份时间目录/ --incremental-dir=/data/backup/mysql/increment_data/增量备份或继续增量时间目录/</span><br><span class="line"></span><br><span class="line"><span class="comment">#停止数据库</span></span><br><span class="line">service mysql stop</span><br><span class="line"></span><br><span class="line"><span class="comment">#恢复备份</span></span><br><span class="line">innobackupex --copy-back /data/backup/mysql/全量备份时间目录/</span><br><span class="line"></span><br><span class="line"><span class="comment">#如恢复备份失败，则copy全量备份时间目录文件</span></span><br><span class="line">cp ibdata1 ib_logfile0 ib_logfile1 /data/mysql/</span><br><span class="line">cp -av dbname/ /data/mysql/</span><br><span class="line"></span><br><span class="line"><span class="comment">#修改文件属性</span></span><br><span class="line">chown -R mysql:mysql /data/mysql/*</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动数据库</span></span><br><span class="line">service mysql start</span><br></pre></td></tr></table></figure>
+<h2 id="3-2-脚本执行"><a href="#3-2-脚本执行" class="headerlink" title="3.2 脚本执行"></a>3.2 脚本执行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line"></span><br><span class="line"><span class="comment">## 3.3 参考文献</span></span><br><span class="line"></span><br><span class="line">https://www.cnblogs.com/jjzd/p/6659607.html</span><br><span class="line"></span><br><span class="line">https://blog.csdn.net/wfs1994/article/details/80398234</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 配置远程免密登录</span></span><br><span class="line"></span><br><span class="line">scp远程复制、ssh远程连接等命令需要密码登录；尽量使用安全风险相对较低的用户替代root用户。</span><br><span class="line"></span><br><span class="line">``` bash</span><br><span class="line"><span class="comment">#生成秘钥，注：先查看root目录下是否已生成rsa密钥，生成就跳过此步骤，避免旧密钥已被覆盖而影响其它服务</span></span><br><span class="line">ssh-keygen -t rsa</span><br><span class="line"></span><br><span class="line"><span class="comment">#添加公钥到远程主机并根据提示数据主机用户密码</span></span><br><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub 用户名@主机IP</span><br></pre></td></tr></table></figure>
       
 
       
@@ -267,11 +225,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Github</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
         		</li>
       		
 		</ul>
@@ -327,7 +281,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:www.jr968.cn/2018/08/25/Git安装与使用/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:www.jr968.cn/2019/09/07/MySQL数据备份/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -341,18 +295,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/08/25/COOKIE与SESSION/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          COOKIE与SESSION
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/03/14/MySQL数据库优化/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">MySQL数据库优化</div>
+    <a href="/2019/09/06/centos下exrundelete恢复误删数据/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">centos下exrundelete恢复误删数据</div>
       <i class="icon-circle-right"></i>
     </a>
   

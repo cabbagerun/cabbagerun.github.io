@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="centos下exrundelete恢复误删数据">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-06T02:37:46.676Z">
+<meta property="og:updated_time" content="2019-09-07T07:32:22.625Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos下exrundelete恢复误删数据">
 <meta name="twitter:description" content="centos下exrundelete恢复误删数据">
@@ -169,7 +169,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>当发现数据被误删除后，为了避免数据节点因读写而重新分配，应立刻卸载被误删除文件所在的分区，或重新以只读方式挂载此分区，再使用extundelete恢复，最好是预先安装好extundelete。</p>
+        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>当发现数据被误删除后，为了避免数据节点因读写而重新分配，在可能被其他用户读写且保证其他服务正常的情况下可卸载被误删除文件所在的分区，或重新以只读方式挂载此分区，再使用extundelete恢复，最好是预先安装好extundelete。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#卸载分区</span></span><br><span class="line">umount [分区]</span><br><span class="line"></span><br><span class="line"><span class="comment">#重新以只读方式挂载此分区</span></span><br><span class="line">mount -o remount,r [分区]</span><br></pre></td></tr></table></figure>
 <a id="more"></a>
 <h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><h2 id="2-1-yum源安装"><a href="#2-1-yum源安装" class="headerlink" title="2.1 yum源安装"></a>2.1 yum源安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install extundelete -y</span><br></pre></td></tr></table></figure>
@@ -288,6 +288,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/09/07/MySQL数据备份/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          MySQL数据备份
+        
+      </div>
+    </a>
   
   
     <a href="/2019/09/05/Function-Redis-delete-is-deprecated/" id="article-nav-older" class="article-nav-link-wrap">
@@ -421,19 +430,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据安全</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Github</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据安全</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -449,7 +454,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+                <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -458,6 +463,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">Python</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
