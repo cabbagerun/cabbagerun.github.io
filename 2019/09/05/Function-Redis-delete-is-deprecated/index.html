@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="Function Redis::delete() is deprecated">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-10T03:27:27.979Z">
+<meta property="og:updated_time" content="2019-09-10T03:35:59.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Function Redis::delete() is deprecated">
 <meta name="twitter:description" content="Function Redis::delete() is deprecated">
@@ -176,7 +176,7 @@
 <h3 id="2-2-2-安装"><a href="#2-2-2-安装" class="headerlink" title="2.2.2 安装"></a>2.2.2 安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#下载</span></span><br><span class="line">wget https://pecl.php.net/get/redis-4.3.0.tgz</span><br><span class="line"></span><br><span class="line"><span class="comment">#解压</span></span><br><span class="line">tar zxvf redis-4.3.0.tgz &amp;&amp; <span class="built_in">cd</span> redis-4.3.0</span><br><span class="line"></span><br><span class="line"><span class="comment">#phpize安装扩展</span></span><br><span class="line">/usr/<span class="built_in">local</span>/php/bin/phpize</span><br><span class="line">./configure --with-php-config=/usr/<span class="built_in">local</span>/php/bin/php-config</span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
 <p>编译成功后redis.so扩展会存放在/usr/local/php/lib/php/extensions/目录下。</p>
 <p>修改php.ini，添加extension=redis.so(注意：如报错“Module ‘redis’ already loaded in Unknown on line 0”证明编译时已加载)</p>
-<p>重启php即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sevice php-fpm restart</span><br></pre></td></tr></table></figure></p>
+<p>重启php即可<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service php-fpm restart</span><br></pre></td></tr></table></figure></p>
 
       
 
