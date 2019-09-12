@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="Lnmp集成开发环境">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-30T03:03:51.615Z">
+<meta property="og:updated_time" content="2019-09-12T09:16:36.883Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lnmp集成开发环境">
 <meta name="twitter:description" content="Lnmp集成开发环境">
@@ -193,7 +193,23 @@
 </li>
 <li><p>选择虚拟硬盘的文件位置和大小，默认C盘，推荐8G，具体还需根据自己情况选择大小。</p>
 </li>
-<li><p>启动。</p>
+<li><p>启动安装，唯一注意的地方是《软件选择》步骤，根据自己需求是最小安装还是有自己的要求，这里安装《带UGI的服务器》，用户界面方便后面配置网络。</p>
+</li>
+<li><p>网络配置：</p>
+<blockquote>
+<ol>
+<li>管理-》全局设定-》网络-》添加NAT网络(注意：默认为NatNetwork，最好备注指定虚拟机配置或网络组配置名称，此设置主要用户宿主与虚拟机联网使用，也可设置端口转发，转发基本满足业务需求，无需配置静态ip)</li>
+<li>配置《桥接网卡》：选定虚拟机-》设置-》网络-》网卡1(注意：此设置主要用于宿主和虚拟机相互网络访问，需要选择界面名称和勾选接入网线，否则网络无法互通)</li>
+<li>配置《NAT网络》：选定虚拟机-》设置-》网络-》网卡2(注意：此设置保证虚拟机可以联网，需要选择界面名称和勾选接入网线，否则无法上网)</li>
+<li>启动-》命令<code>ifconfig</code>(会发现enp0s3 enp0s8两张网卡，enp0s3为网卡1，enp0s8为网卡2)</li>
+</ol>
+</blockquote>
+</li>
+<li><p>virtualbox固定ip(需转发端口)，无需配置静态ip即可满足业务需求</p>
+</li>
+<li><p>可测试宿主和虚拟机互ping，以及ping外网地址</p>
+</li>
+<li><p>注意在切换了网络环境的情况下只需要重启网络即可</p>
 </li>
 </ol>
 <h1 id="4-OneinStack集成安装"><a href="#4-OneinStack集成安装" class="headerlink" title="4. OneinStack集成安装"></a>4. OneinStack集成安装</h1><p><a href="https://oneinstack.com/install/" target="_blank" rel="noopener">https://oneinstack.com/install/</a></p>
