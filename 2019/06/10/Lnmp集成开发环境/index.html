@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="Lnmp集成开发环境">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-12T09:20:20.097Z">
+<meta property="og:updated_time" content="2019-09-12T09:22:40.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lnmp集成开发环境">
 <meta name="twitter:description" content="Lnmp集成开发环境">
@@ -197,7 +197,7 @@
 </li>
 <li><p>网络配置：</p>
 <blockquote>
-<p>管理-》全局设定-》网络-》添加NAT网络(注意：默认为NatNetwork，最好备注指定虚拟机配置或网络组配置名称，此设置主要用户宿主与虚拟机联网使用，也可设置端口转发，转发基本满足业务需求，无需配置静态ip)</p>
+<p>NatNetwork配置：管理-》全局设定-》网络-》添加NAT网络(注意：默认为NatNetwork，最好备注指定虚拟机配置或网络组配置名称，此设置主要用户宿主与虚拟机联网使用，也可设置端口转发，转发基本满足业务需求，无需配置静态ip)</p>
 </blockquote>
 </li>
 </ol>
@@ -208,7 +208,7 @@
 <p>配置《NAT网络》：选定虚拟机-》设置-》网络-》网卡2(注意：此设置保证虚拟机可以联网，需要选择界面名称和勾选接入网线，否则无法上网)</p>
 </blockquote>
 <blockquote>
-<p>启动-》命令<code>ifconfig</code>(会发现enp0s3 enp0s8两张网卡，enp0s3为网卡1，enp0s8为网卡2)</p>
+<p>启动：命令<code>ifconfig</code>(会发现enp0s3 enp0s8两张网卡，enp0s3为网卡1，enp0s8为网卡2)</p>
 </blockquote>
 <ol start="9">
 <li><p>virtualbox固定ip(需转发端口)，无需配置静态ip即可满足业务需求</p>
