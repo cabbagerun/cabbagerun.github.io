@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="centos中yum update和yum upgrade命令的坑">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-13T05:57:21.207Z">
+<meta property="og:updated_time" content="2019-09-13T14:59:22.812Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos中yum update和yum upgrade命令的坑">
 <meta name="twitter:description" content="centos中yum update和yum upgrade命令的坑">
@@ -172,6 +172,7 @@
         <h1 id="1-遇到的问题"><a href="#1-遇到的问题" class="headerlink" title="1. 遇到的问题"></a>1. 遇到的问题</h1><blockquote>
 <p>1、直接使用yum update和yum upgrade升级的量多，可能有几百甚至上千个需要下载，等待时间较长<br>2、yum update升级时最好不要中断，否则可能导致部分服务不可用，甚至无法重启虚拟机(内核更新不完整导致)，所以生产环境最好不要使用yum update命令</p>
 </blockquote>
+<a id="more"></a>
 <h1 id="2-命令介绍"><a href="#2-命令介绍" class="headerlink" title="2. 命令介绍"></a>2. 命令介绍</h1><blockquote>
 <p>yum upgrade：只升级所有包，不升级软件和系统内核<br>yum update：升级所有包同时也升级软件和系统内核</p>
 </blockquote>
