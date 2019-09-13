@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="centos中yum update和yum upgrade命令的坑">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-13T14:59:22.812Z">
+<meta property="og:updated_time" content="2019-09-13T15:21:19.252Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos中yum update和yum upgrade命令的坑">
 <meta name="twitter:description" content="centos中yum update和yum upgrade命令的坑">
@@ -170,13 +170,19 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="1-遇到的问题"><a href="#1-遇到的问题" class="headerlink" title="1. 遇到的问题"></a>1. 遇到的问题</h1><blockquote>
-<p>1、直接使用yum update和yum upgrade升级的量多，可能有几百甚至上千个需要下载，等待时间较长<br>2、yum update升级时最好不要中断，否则可能导致部分服务不可用，甚至无法重启虚拟机(内核更新不完整导致)，所以生产环境最好不要使用yum update命令</p>
+<p>1、直接使用yum update和yum upgrade升级的量多，可能有几百甚至上千个需要下载，等待时间较长<br>2、yum update升级时最好不要中断，否则可能导致部分服务不可用，甚至无法重启虚拟机(内核更新不完整导致或包的依赖关系被破坏)，所以生产环境最好不要使用yum update命令</p>
 </blockquote>
 <a id="more"></a>
 <h1 id="2-命令介绍"><a href="#2-命令介绍" class="headerlink" title="2. 命令介绍"></a>2. 命令介绍</h1><blockquote>
-<p>yum upgrade：只升级所有包，不升级软件和系统内核<br>yum update：升级所有包同时也升级软件和系统内核</p>
+<p>yum upgrade：只升级所有包，不升级软件和系统内核，保留旧包，并取代<br>yum update：升级所有包同时也升级软件和系统内核，删除旧包</p>
 </blockquote>
-<h1 id="3-用法"><a href="#3-用法" class="headerlink" title="3. 用法"></a>3. 用法</h1><h1 id="4-错误使用命令回滚"><a href="#4-错误使用命令回滚" class="headerlink" title="4. 错误使用命令回滚"></a>4. 错误使用命令回滚</h1><h2 id="4-1-直接快照回滚"><a href="#4-1-直接快照回滚" class="headerlink" title="4.1 直接快照回滚"></a>4.1 直接快照回滚</h2><p>在有备份快照的情况下可直接使用快照回滚系统到某个时刻</p>
+<h1 id="3-yum命令基础用法"><a href="#3-yum命令基础用法" class="headerlink" title="3. yum命令基础用法"></a>3. yum命令基础用法</h1><blockquote>
+<p>1.列出所有可更新的软件清单命令：yum check-update<br>2.升级所有包同时也升级软件和系统内核(<strong>慎用</strong>)：yum update<br>2.只升级所有包，不升级软件和系统内核，即update的–obsoletes选项(<strong>慎用</strong>)：yum upgrade(yum update –obsoletes)<br>3.仅安装指定的软件命令：yum install &lt;package_name&gt;<br>4.仅更新指定的软件命令：yum update &lt;package_name&gt;<br>4.仅更新指定的软件命令：yum upgrade &lt;package_name&gt;<br>5.列出所有可安裝的软件清单命令：yum list<br>6.删除软件包命令：yum remove &lt;package_name&gt;<br>7.查找软件包 命令：yum search <keyword><br>8.清除缓存命令:</keyword></p>
+<blockquote>
+<p>yum clean packages: 清除缓存目录下的软件包<br>yum clean headers: 清除缓存目录下的 headers<br>yum clean oldheaders: 清除缓存目录下旧的 headers<br>yum clean, yum clean all (= yum clean packages; yum clean oldheaders) :清除缓存目录下的软件包及旧的headers</p>
+</blockquote>
+</blockquote>
+<h1 id="4-错误使用命令回滚"><a href="#4-错误使用命令回滚" class="headerlink" title="4. 错误使用命令回滚"></a>4. 错误使用命令回滚</h1><h2 id="4-1-直接快照回滚"><a href="#4-1-直接快照回滚" class="headerlink" title="4.1 直接快照回滚"></a>4.1 直接快照回滚</h2><p>在有备份快照的情况下可直接使用快照回滚系统到某个时刻</p>
 <h2 id="4-2-直接命令回滚"><a href="#4-2-直接命令回滚" class="headerlink" title="4.2 直接命令回滚"></a>4.2 直接命令回滚</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看事务历史记录，得到事务ID</span></span><br><span class="line">yum <span class="built_in">history</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#或查看某个软件包</span></span><br><span class="line">yum <span class="built_in">history</span> list [包名/事务ID]</span><br><span class="line"></span><br><span class="line"><span class="comment">#开始回滚</span></span><br><span class="line">yum <span class="built_in">history</span> undo ID</span><br></pre></td></tr></table></figure>
       
 
