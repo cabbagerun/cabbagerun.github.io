@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="Function Redis::delete() is deprecated">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-10T03:35:59.962Z">
+<meta property="og:updated_time" content="2019-09-13T05:18:31.776Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Function Redis::delete() is deprecated">
 <meta name="twitter:description" content="Function Redis::delete() is deprecated">
@@ -169,7 +169,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-原因"><a href="#1-原因" class="headerlink" title="1. 原因"></a>1. 原因</h1><p>php-redis v5版本弃用了delete()操作，改为del()，实际版本可通过phpinfo或<code>redis-server -v</code>查看。</p>
+        <h1 id="1-原因"><a href="#1-原因" class="headerlink" title="1. 原因"></a>1. 原因</h1><p>php-redis v5版本弃用了delete()操作，改为del()，实际版本可通过phpinfo()函数或<code>redis-cli -v</code>查看。<br>注意：这里安装的只是php的redis扩展，降低版本后redis服务器和客户端还是以前的版本，所以安装后以phpinfo()函数结果查看</p>
 <a id="more"></a>
 <h1 id="2-解决"><a href="#2-解决" class="headerlink" title="2. 解决"></a>2. 解决</h1><h2 id="2-1-修改操作方法"><a href="#2-1-修改操作方法" class="headerlink" title="2.1 修改操作方法"></a>2.1 修改操作方法</h2><p>将代码中delete()改为del()，但不太推荐，尤其是对一些集成框架不友好，可能会改动到框架相对底层的代码。</p>
 <h2 id="2-2-重装低版本rphp-edis"><a href="#2-2-重装低版本rphp-edis" class="headerlink" title="2.2 重装低版本rphp-edis"></a>2.2 重装低版本rphp-edis</h2><h3 id="2-2-1-下载源"><a href="#2-2-1-下载源" class="headerlink" title="2.2.1 下载源"></a>2.2.1 下载源</h3><p><a href="https://pecl.php.net/package/redis" target="_blank" rel="noopener">https://pecl.php.net/package/redis</a><br>版本低于v5就好</p>
