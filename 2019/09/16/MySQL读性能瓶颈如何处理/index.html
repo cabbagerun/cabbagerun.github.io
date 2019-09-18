@@ -6,24 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="www.jr968.cn">
-  <title>hexo+github实现相册功能 | JR968的博客</title>
+  <title>MySQL读性能瓶颈如何处理 | JR968的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="使用hexo+github实现相册详细教程">
-<meta name="keywords" content="Github,Git,node.js,Python">
+  <meta name="description" content="MySQL读性能瓶颈如何处理">
+<meta name="keywords" content="MySQL">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hexo+github实现相册功能">
-<meta property="og:url" content="www.jr968.cn/2018/03/09/hexo-github实现相册功能/index.html">
+<meta property="og:title" content="MySQL读性能瓶颈如何处理">
+<meta property="og:url" content="www.jr968.cn/2019/09/16/MySQL读性能瓶颈如何处理/index.html">
 <meta property="og:site_name" content="JR968的博客">
-<meta property="og:description" content="使用hexo+github实现相册详细教程">
+<meta property="og:description" content="MySQL读性能瓶颈如何处理">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="/assets/hexo+github实现相册功能/github博客相册仓库.jpg">
-<meta property="og:image" content="/assets/hexo+github实现相册功能/github博客相册图片命名格式.png">
-<meta property="og:image" content="/assets/hexo+github实现相册功能/github博客相册json数据格式.png">
-<meta property="og:updated_time" content="2018-08-25T14:54:00.058Z">
+<meta property="og:updated_time" content="2019-09-18T09:35:43.349Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hexo+github实现相册功能">
-<meta name="twitter:description" content="使用hexo+github实现相册详细教程">
-<meta name="twitter:image" content="/assets/hexo+github实现相册功能/github博客相册仓库.jpg">
+<meta name="twitter:title" content="MySQL读性能瓶颈如何处理">
+<meta name="twitter:description" content="MySQL读性能瓶颈如何处理">
   
     <link rel="alternative" href="/atom.xml" title="JR968的博客" type="application/atom+xml">
   
@@ -153,90 +149,33 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hexo-github实现相册功能" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-MySQL读性能瓶颈如何处理" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      hexo+github实现相册功能
+      MySQL读性能瓶颈如何处理
     </h1>
   
 
         
-        <a href="/2018/03/09/hexo-github实现相册功能/" class="archive-article-date">
-  	<time datetime="2018-03-09T13:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-03-09</time>
+        <a href="/2019/09/16/MySQL读性能瓶颈如何处理/" class="archive-article-date">
+  	<time datetime="2019-09-16T10:29:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><blockquote>
-<ol>
-<li>我使用的主题是<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">hexo-theme-yilia</a>;</li>
-<li>需要<a href="https://git-scm.com/downloads/" target="_blank" rel="noopener">Git</a>、<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">node.js</a>及<a href="https://www.python.org/downloads/" target="_blank" rel="noopener">Python</a>环境；</li>
-<li>下面网友提供的相册功能实现方式，在此记录一下自己的实践笔记；</li>
-</ol>
-</blockquote>
+        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>首先需要分析数据库读性能瓶颈主要发生在哪里，不需要一碰到读瓶颈就想到主从，因为主从架构比较复杂，对于数据量大、并发量高、一致性要求高的业务场景会加大研发难度。<br>可以从缓存、分表、再主从去考虑，在开发中碰到读问题应最先考虑到使用缓存，为避免缓存雪崩、缓存击穿等问题可以对大表进行水平分表，最后再考虑主从(主从也不是必须，在缓存失效前提前更新缓存)</p>
 <a id="more"></a>
-<h2 id="1-1-方案"><a href="#1-1-方案" class="headerlink" title="1.1 方案"></a>1.1 方案</h2><blockquote>
-<ol>
-<li>在github上新建一个仓库，主要用于存储图片，可以通过url访问到，也方便管理，并将仓库克隆到你本地博客(如：F:\hexo\，F:\blog-photo)同目录下；</li>
-<li>将要放到相册的图片处理成json格式的数据，然后进行访问，这里json的格式需要配合要使用的样式，所以需要处理成特定格式的json数据；</li>
-<li>图片裁剪，因为相册显示的样式最好是正方形的的图片，这里使用脚本处理一下；</li>
-<li>图片压缩，相册显示的图片是压缩后的图片，提高加载的速度，打开后的图片是原图；</li>
-</ol>
-</blockquote>
-<h1 id="2-实现"><a href="#2-实现" class="headerlink" title="2. 实现"></a>2. 实现</h1><h2 id="2-1-github操作"><a href="#2-1-github操作" class="headerlink" title="2.1 github操作"></a>2.1 github操作</h2><p>建立一个用于存储相册的仓库，我这里建立了名为blog-photo的仓库</p>
-<p><img src="/assets/hexo+github实现相册功能/github博客相册仓库.jpg" alt="Alt text"></p>
-<h2 id="2-2-博客操作"><a href="#2-2-博客操作" class="headerlink" title="2.2 博客操作"></a>2.2 博客操作</h2><blockquote>
-<ol>
-<li>在你本地博客根目录下的source文件夹下建立一个photos文件夹；</li>
-<li>下载<a href="https://github.com/lawlite19/Blog-Back-Up/tree/master/blog_photos_copy" target="_blank" rel="noopener">样式文件</a>放到photos文件夹下;</li>
-<li>修改ins.js文件，主要是里面的render函数，minSrc和src对应到你的github放图片的地址；</li>
-</ol>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">var render = <span class="keyword">function</span> render(res) &#123;</span><br><span class="line">	var ulTmpl = <span class="string">""</span>;</span><br><span class="line">	<span class="keyword">for</span> (var j = 0, len2 = res.list.length; j &lt; len2; j++) &#123;</span><br><span class="line">		var data = res.list[j].arr;</span><br><span class="line">		var liTmpl = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">for</span> (var i = 0, len = data.link.length; i &lt; len; i++) &#123;</span><br><span class="line">			var minSrc = <span class="string">'https://raw.githubusercontent.com/cabbagerun/blog-photo/master/min_photos/'</span> + data.link[i];</span><br><span class="line">			var src = <span class="string">'https://raw.githubusercontent.com/cabbagerun/blog-photo/master/photos/'</span> + data.link[i];</span><br><span class="line">			var <span class="built_in">type</span> = data.type[i];</span><br><span class="line">			var target = src + (<span class="built_in">type</span> === <span class="string">'video'</span> ? <span class="string">'.mp4'</span> : <span class="string">'.jpg'</span>);</span><br><span class="line">			src += <span class="string">''</span>;</span><br><span class="line">			liTmpl += <span class="string">'&lt;figure class="thumb" itemprop="associatedMedia" itemscope="" itemtype="http://schema.org/ImageObject"&gt;\</span></span><br><span class="line"><span class="string">				&lt;a href="'</span> + src + <span class="string">'" itemprop="contentUrl" data-size="1080x1080" data-type="'</span> + <span class="built_in">type</span> + <span class="string">'" data-target="'</span> + src + <span class="string">'"&gt;\</span></span><br><span class="line"><span class="string">				  &lt;img class="reward-img" data-type="'</span> + <span class="built_in">type</span> + <span class="string">'" data-src="'</span> + minSrc + <span class="string">'" src="'</span> + minSrc + <span class="string">'" itemprop="thumbnail" onload="lzld(this)"&gt;\</span></span><br><span class="line"><span class="string">				&lt;/a&gt;\</span></span><br><span class="line"><span class="string">				&lt;figcaption style="display:none" itemprop="caption description"&gt;'</span> + data.text[i] + <span class="string">'&lt;/figcaption&gt;\</span></span><br><span class="line"><span class="string">			&lt;/figure&gt;'</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	ulTmpl = ulTmpl + <span class="string">'&lt;section class="archives album"&gt;&lt;h1 class="year"&gt;'</span> + data.year + <span class="string">'年&lt;em&gt;'</span> + data.month + <span class="string">'月&lt;/em&gt;&lt;/h1&gt;\</span></span><br><span class="line"><span class="string">	&lt;ul class="img-box-ul"&gt;'</span> + liTmpl + <span class="string">'&lt;/ul&gt;\</span></span><br><span class="line"><span class="string">	&lt;/section&gt;'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="3-图片处理"><a href="#3-图片处理" class="headerlink" title="3. 图片处理"></a>3. 图片处理</h1><blockquote>
-<ol>
-<li>下载<a href="https://github.com/lawlite19/Blog-Back-Up" target="_blank" rel="noopener">python脚本</a></li>
-<li>将ImageProcess.py、ImageProcess.pyc、tool.py三个文件放在根目录下的blog-photo目录里；</li>
-</ol>
-</blockquote>
-<h2 id="3-1-裁剪图片"><a href="#3-1-裁剪图片" class="headerlink" title="3.1 裁剪图片"></a>3.1 裁剪图片</h2><p>对应函数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">def cut_by_ratio(self):</span><br><span class="line">	<span class="string">""</span><span class="string">"按照图片长宽进行分割</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">	------------</span></span><br><span class="line"><span class="string">	取中间的部分，裁剪成正方形</span></span><br><span class="line"><span class="string">	"</span><span class="string">""</span></span><br><span class="line">	im = Image.open(self.infile)</span><br><span class="line">	(x, y) = im.size</span><br><span class="line">	<span class="keyword">if</span> x &gt; y:</span><br><span class="line">		region = (int(x/2-y/2), 0, int(x/2+y/2), y)</span><br><span class="line">	<span class="keyword">elif</span> x &lt; y:</span><br><span class="line">		region = (0, int(y/2-x/2), x, int(y/2+x/2))</span><br><span class="line">	<span class="keyword">else</span>:</span><br><span class="line">		region = (0, 0, x, y)</span><br><span class="line"></span><br><span class="line">	<span class="comment">#裁切图片</span></span><br><span class="line">	crop_img = im.crop(region)</span><br><span class="line">	<span class="comment">#保存裁切后的图片</span></span><br><span class="line">	crop_img.save(self.outfile)</span><br></pre></td></tr></table></figure>
-<h2 id="3-2-压缩图片"><a href="#3-2-压缩图片" class="headerlink" title="3.2 压缩图片"></a>3.2 压缩图片</h2><p>对应函数：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">def compress(choose, des_dir, src_dir, file_list):</span><br><span class="line">    <span class="string">""</span><span class="string">"压缩算法，img.thumbnail对图片进行压缩，</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    参数</span></span><br><span class="line"><span class="string">    -----------</span></span><br><span class="line"><span class="string">    choose: str</span></span><br><span class="line"><span class="string">            选择压缩的比例，有4个选项，越大压缩后的图片越小</span></span><br><span class="line"><span class="string">    "</span><span class="string">""</span></span><br><span class="line">    <span class="keyword">if</span> choose == <span class="string">'1'</span>:</span><br><span class="line">        scale = SIZE_normal</span><br><span class="line">    <span class="keyword">if</span> choose == <span class="string">'2'</span>:</span><br><span class="line">        scale = SIZE_small</span><br><span class="line">    <span class="keyword">if</span> choose == <span class="string">'3'</span>:</span><br><span class="line">        scale = SIZE_more_small</span><br><span class="line">    <span class="keyword">if</span> choose == <span class="string">'4'</span>:</span><br><span class="line">        scale = SIZE_more_small_small</span><br><span class="line">    <span class="keyword">for</span> infile <span class="keyword">in</span> file_list:</span><br><span class="line">        img = Image.open(src_dir+infile)</span><br><span class="line">        <span class="comment"># size_of_file = os.path.getsize(infile)</span></span><br><span class="line">        w, h = img.size</span><br><span class="line">        img.thumbnail((int(w/scale), int(h/scale)))</span><br><span class="line">        img.save(des_dir + infile)</span><br></pre></td></tr></table></figure>
-<h1 id="4-github提交"><a href="#4-github提交" class="headerlink" title="4. github提交"></a>4. github提交</h1><blockquote>
-<ol>
-<li>处理完成之后需要将处理后的图片提交到github上;</li>
-<li>这里同样使用脚本的方式，需要<a href="https://jingyan.baidu.com/article/fec4bce271601ff2618d8be3.html" target="_blank" rel="noopener">将git命令行配置到环境变量中</a>;</li>
-</ol>
-</blockquote>
-<p>对应函数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def git_operation():</span><br><span class="line">    <span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">    git 命令行函数，将仓库提交</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    ----------</span></span><br><span class="line"><span class="string">    需要安装git命令行工具，并且添加到环境变量中</span></span><br><span class="line"><span class="string">    '</span><span class="string">''</span></span><br><span class="line">    os.system(<span class="string">'git add --all'</span>)</span><br><span class="line">    os.system(<span class="string">'git commit -m "add photos"'</span>)</span><br><span class="line">    os.system(<span class="string">'git push origin master'</span>)</span><br></pre></td></tr></table></figure></p>
-<h1 id="5-json数据处理"><a href="#5-json数据处理" class="headerlink" title="5. json数据处理"></a>5. json数据处理</h1><h2 id="5-1-图片命名格式"><a href="#5-1-图片命名格式" class="headerlink" title="5.1 图片命名格式"></a>5.1 图片命名格式</h2><blockquote>
-<ol>
-<li>采用的方式是读取图片的名字作为其中的text的内容; </li>
-<li>最前面是日期，然后用_进行分隔;</li>
-<li>后面是图片的描述信息，注意不要包含_和.符号;</li>
-</ol>
-</blockquote>
-<p><img src="/assets/hexo+github实现相册功能/github博客相册图片命名格式.png" alt="Alt text"></p>
-<h2 id="5-2-json数据"><a href="#5-2-json数据" class="headerlink" title="5.2 json数据"></a>5.2 json数据</h2><p><img src="/assets/hexo+github实现相册功能/github博客相册json数据格式.png" alt="Alt text"></p>
-<h2 id="5-3-实现方式"><a href="#5-3-实现方式" class="headerlink" title="5.3 实现方式"></a>5.3 实现方式</h2><blockquote>
-<p>注意代码中../hexo/source/photos/data.json是对应到你本地博客的相对路径；</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">def handle_photo():</span><br><span class="line">    <span class="string">''</span><span class="string">'根据图片的文件名处理成需要的json格式的数据</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    -----------</span></span><br><span class="line"><span class="string">    最后将data.json文件存到博客的source/photos文件夹下</span></span><br><span class="line"><span class="string">    '</span><span class="string">''</span></span><br><span class="line">    src_dir, des_dir = <span class="string">"photos/"</span>, <span class="string">"min_photos/"</span></span><br><span class="line">    file_list = list_img_file(src_dir)</span><br><span class="line">    list_info = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(file_list)):</span><br><span class="line">        filename = file_list[i]</span><br><span class="line">        date_str, info = filename.split(<span class="string">"_"</span>)</span><br><span class="line">        info, _ = info.split(<span class="string">"."</span>)</span><br><span class="line">        date = datetime.strptime(date_str, <span class="string">"%Y-%m-%d"</span>)</span><br><span class="line">        year_month = date_str[0:7]            </span><br><span class="line">        <span class="keyword">if</span> i == 0:  <span class="comment"># 处理第一个文件</span></span><br><span class="line">            new_dict = &#123;<span class="string">"date"</span>: year_month, <span class="string">"arr"</span>:&#123;<span class="string">'year'</span>: date.year,</span><br><span class="line">                                                                   <span class="string">'month'</span>: date.month,</span><br><span class="line">                                                                   <span class="string">'link'</span>: [filename],</span><br><span class="line">                                                                   <span class="string">'text'</span>: [info],</span><br><span class="line">                                                                   <span class="string">'type'</span>: [<span class="string">'image'</span>]</span><br><span class="line">                                                                   &#125;</span><br><span class="line">                                        &#125; </span><br><span class="line">            list_info.append(new_dict)</span><br><span class="line">        <span class="keyword">elif</span> year_month != list_info[-1][<span class="string">'date'</span>]:  <span class="comment"># 不是最后的一个日期，就新建一个dict</span></span><br><span class="line">            new_dict = &#123;<span class="string">"date"</span>: year_month, <span class="string">"arr"</span>:&#123;<span class="string">'year'</span>: date.year,</span><br><span class="line">                                                   <span class="string">'month'</span>: date.month,</span><br><span class="line">                                                   <span class="string">'link'</span>: [filename],</span><br><span class="line">                                                   <span class="string">'text'</span>: [info],</span><br><span class="line">                                                   <span class="string">'type'</span>: [<span class="string">'image'</span>]</span><br><span class="line">                                                   &#125;</span><br><span class="line">                        &#125;</span><br><span class="line">            list_info.append(new_dict)</span><br><span class="line">        <span class="keyword">else</span>:  <span class="comment"># 同一个日期</span></span><br><span class="line">            list_info[-1][<span class="string">'arr'</span>][<span class="string">'link'</span>].append(filename)</span><br><span class="line">            list_info[-1][<span class="string">'arr'</span>][<span class="string">'text'</span>].append(info)</span><br><span class="line">            list_info[-1][<span class="string">'arr'</span>][<span class="string">'type'</span>].append(<span class="string">'image'</span>)</span><br><span class="line">    list_info.reverse()  <span class="comment"># 翻转</span></span><br><span class="line">    final_dict = &#123;<span class="string">"list"</span>: list_info&#125;</span><br><span class="line">    with open(<span class="string">"../hexo/source/photos/data.json"</span>,<span class="string">"w"</span>) as fp:</span><br><span class="line">        json.dump(final_dict, fp)</span><br></pre></td></tr></table></figure>
-<h1 id="6-其他"><a href="#6-其他" class="headerlink" title="6. 其他"></a>6. 其他</h1><blockquote>
-<p>使用Python去执行blog-photo下的tool.py文件更新图片数据到本地博客/hexo/source/photos/data.json数据；<br>python本地环境还需自行安装，具体查看<a href="https://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000" target="_blank" rel="noopener">Python相关教材</a></p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> /f/blog-photo <span class="comment"># 你的相册目录</span></span><br><span class="line">$ python tool.py <span class="comment"># 执行python脚本</span></span><br><span class="line">$ <span class="built_in">cd</span> /f/hexo/</span><br><span class="line">$ hexo d -g <span class="comment"># 生成静态文件并提交到github</span></span><br></pre></td></tr></table></figure>
-<h2 id="6-1-注意事项"><a href="#6-1-注意事项" class="headerlink" title="6.1 注意事项"></a>6.1 注意事项</h2><blockquote>
-<p>执行python脚本时可能会遇到一些小问题，如PIL库(图像处理标准库)找不到、pip命令不存在等(一个Python包管理工具)，刚刚接触Python，相关总结可能会在往后总结一下；</p>
-</blockquote>
-
+<h1 id="2-水平分表"><a href="#2-水平分表" class="headerlink" title="2. 水平分表"></a>2. 水平分表</h1><p>常用的分表方法：按时间、按区间、按hash</p>
+<h2 id="2-1-按时间"><a href="#2-1-按时间" class="headerlink" title="2.1 按时间"></a>2.1 按时间</h2><p>针对时效性较强的数据(新数据使用率远远大于旧数据，如微博消息等)，按不同的时间进行水平分表，如月、季等。</p>
+<h2 id="2-2-按区间"><a href="#2-2-按区间" class="headerlink" title="2.2 按区间"></a>2.2 按区间</h2><p>按自增id的区间水平分表，如tb1：1~100W；tb2：101w~200w…</p>
+<h2 id="2-3-按hash"><a href="#2-3-按hash" class="headerlink" title="2.3 按hash"></a>2.3 按hash</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#crc32</span></span><br><span class="line"><span class="keyword">function</span> get_hash_table(<span class="variable">$table</span>, <span class="variable">$userid</span>) &#123;</span><br><span class="line">	<span class="variable">$str</span> = crc32(<span class="variable">$userid</span>);</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$str</span> &lt; 0) &#123;</span><br><span class="line">		<span class="variable">$hash</span> = <span class="string">"0"</span> . substr(abs(<span class="variable">$str</span>), 0, 1);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="variable">$hash</span> = substr(<span class="variable">$str</span>, 0, 2);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">return</span> <span class="variable">$table</span> . <span class="string">"_"</span> . <span class="variable">$hash</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="3-主从配置"><a href="#3-主从配置" class="headerlink" title="3. 主从配置"></a>3. 主从配置</h1>
       
 
       
@@ -280,19 +219,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Github</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">Git</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">node.js</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Python</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
         		</li>
       		
 		</ul>
@@ -348,7 +275,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:www.jr968.cn/2018/03/09/hexo-github实现相册功能/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:www.jr968.cn/2019/09/16/MySQL读性能瓶颈如何处理/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -362,18 +289,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/03/13/MySQL数据库优化要点/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          MySQL数据库优化要点
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/03/09/使用hexo-github搭建免费个人博客/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">使用hexo+github搭建免费个人博客</div>
+    <a href="/2019/09/14/netdata开源服务器监控工具/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">netdata开源服务器监控工具</div>
       <i class="icon-circle-right"></i>
     </a>
   
