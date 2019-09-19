@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="MySQL读性能瓶颈如何处理">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-19T06:37:19.540Z">
+<meta property="og:updated_time" content="2019-09-19T06:59:27.183Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL读性能瓶颈如何处理">
 <meta name="twitter:description" content="MySQL读性能瓶颈如何处理">
@@ -169,7 +169,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>首先需要分析数据库读性能瓶颈主要发生在哪里，不需要一碰到读瓶颈就想到主从，因为主从架构比较复杂，对于数据量大、并发量高、一致性要求高的业务场景会加大研发难度。<br>可以从缓存、分表、再主从去考虑，在开发中碰到读问题应最先考虑到使用缓存，为避免缓存雪崩、缓存击穿等问题可以对大表进行水平分表，最后再考虑主从(主从也不是必须，在缓存失效前提前更新缓存)</p>
+        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>首先需要分析数据库读性能瓶颈主要发生在哪里，不需要一碰到读瓶颈就想到主从，因为主从架构比较复杂，对于数据量大、并发量高、一致性要求高的业务场景会加大研发难度。<br>可以从缓存、分表、再主从去考虑，在开发中碰到读问题应最先考虑到使用redis缓存，为避免缓存雪崩、缓存击穿、缓存雪崩等问题可以对大表进行水平分表提高效率，最后再考虑主从(主从也不是必须，在缓存失效前提前更新缓存)。<br><a href="">缓存雪崩、缓存击穿、缓存雪崩等问题</a>可通过代码去优化。</p>
 <a id="more"></a>
 <h1 id="2-水平分表"><a href="#2-水平分表" class="headerlink" title="2. 水平分表"></a>2. 水平分表</h1><p>常用的分表方法：按时间、按区间、按hash</p>
 <h2 id="2-1-按时间"><a href="#2-1-按时间" class="headerlink" title="2.1 按时间"></a>2.1 按时间</h2><p>针对时效性较强的数据(新数据使用率远远大于旧数据，如微博消息等)，按不同的时间进行水平分表，如月、季等。</p>
@@ -305,6 +305,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2019/09/19/Redis缓存雪崩、缓存击穿、缓存雪崩/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Redis缓存雪崩、缓存击穿、缓存雪崩
+        
+      </div>
+    </a>
   
   
     <a href="/2019/09/14/netdata开源服务器监控工具/" id="article-nav-older" class="article-nav-link-wrap">
@@ -442,6 +451,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -451,14 +468,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -474,11 +483,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>

@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="www.jr968.cn">
-  <title>netdata开源服务器监控工具 | JR968的博客</title>
+  <title>Redis缓存雪崩、缓存击穿、缓存雪崩 | JR968的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="netdata开源服务器监控工具">
-<meta name="keywords" content="Linux">
+  <meta name="description" content="Redis缓存雪崩、缓存击穿、缓存雪崩">
+<meta name="keywords" content="Redis">
 <meta property="og:type" content="article">
-<meta property="og:title" content="netdata开源服务器监控工具">
-<meta property="og:url" content="www.jr968.cn/2019/09/14/netdata开源服务器监控工具/index.html">
+<meta property="og:title" content="Redis缓存雪崩、缓存击穿、缓存雪崩">
+<meta property="og:url" content="www.jr968.cn/2019/09/19/Redis缓存雪崩、缓存击穿、缓存雪崩/index.html">
 <meta property="og:site_name" content="JR968的博客">
-<meta property="og:description" content="netdata开源服务器监控工具">
+<meta property="og:description" content="Redis缓存雪崩、缓存击穿、缓存雪崩">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-16T09:26:33.863Z">
+<meta property="og:updated_time" content="2019-09-19T07:27:40.931Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="netdata开源服务器监控工具">
-<meta name="twitter:description" content="netdata开源服务器监控工具">
+<meta name="twitter:title" content="Redis缓存雪崩、缓存击穿、缓存雪崩">
+<meta name="twitter:description" content="Redis缓存雪崩、缓存击穿、缓存雪崩">
   
     <link rel="alternative" href="/atom.xml" title="JR968的博客" type="application/atom+xml">
   
@@ -149,32 +149,46 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-netdata开源服务器监控工具" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Redis缓存雪崩、缓存击穿、缓存雪崩" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      netdata开源服务器监控工具
+      Redis缓存雪崩、缓存击穿、缓存雪崩
     </h1>
   
 
         
-        <a href="/2019/09/14/netdata开源服务器监控工具/" class="archive-article-date">
-  	<time datetime="2019-09-14T13:15:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-14</time>
+        <a href="/2019/09/19/Redis缓存雪崩、缓存击穿、缓存雪崩/" class="archive-article-date">
+  	<time datetime="2019-09-19T07:00:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-19</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>Netdata是系统和应用程序的分布式，实时，性能和健康监控。它是您在所有系统和容器上安装的高度优化的监视代理程序。<br>Netdata 使用高度交互的Web仪表板，实时提供其运行的系统（包括Web服务器，数据库，应用程序）上发生的所有事情的无与伦比的见解。它可以自动运行，无需任何第三方组件，也可以集成到现有的监控工具链（Prometheus，Graphite，OpenTSDB，Kafka，Grafana等）。<br>Netdata是快速和有效的，设计成在所有的系统（永久运行物理及虚拟服务器，容器，的IoT装置），而不破坏它们的核心功能。<br>Netdata是免费的开源软件，目前可在Linux，FreeBSD和MacOS上运行。</p>
+        <h1 id="1-缓存穿透"><a href="#1-缓存穿透" class="headerlink" title="1. 缓存穿透"></a>1. 缓存穿透</h1><h2 id="1-1-问题"><a href="#1-1-问题" class="headerlink" title="1.1 问题"></a>1.1 问题</h2><blockquote>
+<p>高频的访问缓存和数据库中都不存在的数据时，导致直接访问到数据库而压力过大造成，如访问一个id为-1的数据。</p>
+</blockquote>
+<h2 id="1-2-解决"><a href="#1-2-解决" class="headerlink" title="1.2 解决"></a>1.2 解决</h2><blockquote>
+<p>1、校验请求产生，使参数合法，如判断id必须大于0。</p>
+</blockquote>
 <a id="more"></a>
-<h1 id="2-安装"><a href="#2-安装" class="headerlink" title="2. 安装"></a>2. 安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash &lt;(curl -Ss https://my-netdata.io/kickstart.sh) all</span><br></pre></td></tr></table></figure>
-<h1 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h1><p>主机地址:19999，即可通过NetData查看服务器状态 例如访问我本地:127.0.0.1:19999。<br>如无法访问需检查服务是否开启：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#检测进程</span></span><br><span class="line">ps -aux | grep netdata</span><br><span class="line"></span><br><span class="line"><span class="comment">#检测端口</span></span><br><span class="line">netstat -tunlp | grep netdata</span><br><span class="line"></span><br><span class="line"><span class="comment">#如上述没有问题则检测防火墙</span></span><br><span class="line">more /etc/sysconfig/iptables | grep 19999</span><br></pre></td></tr></table></figure></p>
-<p><a href="https://www.jr968.cn/2019/08/29/%E9%98%B2%E7%81%AB%E5%A2%99%E5%BC%80%E6%94%BE%E7%AB%AF%E5%8F%A3/">防火墙开放端口</a></p>
-<h1 id="4-MySQL监控"><a href="#4-MySQL监控" class="headerlink" title="4. MySQL监控"></a>4. MySQL监控</h1>
+<h1 id="2-缓存击穿"><a href="#2-缓存击穿" class="headerlink" title="2. 缓存击穿"></a>2. 缓存击穿</h1><h2 id="2-1-问题"><a href="#2-1-问题" class="headerlink" title="2.1 问题"></a>2.1 问题</h2><blockquote>
+<p>指并发情况下某一缓存失效，同时访问到数据库导致数据库压力变大。</p>
+</blockquote>
+<h2 id="2-2-解决"><a href="#2-2-解决" class="headerlink" title="2.2 解决"></a>2.2 解决</h2><blockquote>
+<p>1、设置热点数据不过期。<br>2、增加锁机制，由获取到锁的去更新数据，其他的等待，缺点是用户体验差。</p>
+</blockquote>
+<h1 id="3-缓存雪崩"><a href="#3-缓存雪崩" class="headerlink" title="3. 缓存雪崩"></a>3. 缓存雪崩</h1><h2 id="3-1-问题"><a href="#3-1-问题" class="headerlink" title="3.1 问题"></a>3.1 问题</h2><blockquote>
+<p>指大批量缓存集中在某个并发高的时间节点上，到时所有的请求都直接访问到数据库，造成数据库超高压力甚至可能导致宕机的情况。</p>
+</blockquote>
+<h2 id="3-2-解决"><a href="#3-2-解决" class="headerlink" title="3.2 解决"></a>3.2 解决</h2><blockquote>
+<p>1、对缓存过期时间增加随机数，避免同一时间过期。<br>2、对热点数据设置不过期。<br>3、可提前通过某些机制提前更新缓存。</p>
+</blockquote>
+
       
 
       
@@ -218,7 +232,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
         		</li>
       		
 		</ul>
@@ -274,7 +288,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:www.jr968.cn/2019/09/14/netdata开源服务器监控工具/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http:www.jr968.cn/2019/09/19/Redis缓存雪崩、缓存击穿、缓存雪崩/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -288,18 +302,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/09/16/MySQL读性能瓶颈如何处理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          MySQL读性能瓶颈如何处理
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/09/12/centos中yum-update和yum-upgrade命令的坑/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">centos中yum update和yum upgrade命令的坑</div>
+    <a href="/2019/09/16/MySQL读性能瓶颈如何处理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MySQL读性能瓶颈如何处理</div>
       <i class="icon-circle-right"></i>
     </a>
   

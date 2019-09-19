@@ -149,6 +149,85 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Redis缓存雪崩、缓存击穿、缓存雪崩" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/19/Redis缓存雪崩、缓存击穿、缓存雪崩/">Redis缓存雪崩、缓存击穿、缓存雪崩</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/19/Redis缓存雪崩、缓存击穿、缓存雪崩/" class="archive-article-date">
+  	<time datetime="2019-09-19T07:00:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-缓存穿透"><a href="#1-缓存穿透" class="headerlink" title="1. 缓存穿透"></a>1. 缓存穿透</h1><h2 id="1-1-问题"><a href="#1-1-问题" class="headerlink" title="1.1 问题"></a>1.1 问题</h2><blockquote>
+<p>高频的访问缓存和数据库中都不存在的数据时，导致直接访问到数据库而压力过大造成，如访问一个id为-1的数据。</p>
+</blockquote>
+<h2 id="1-2-解决"><a href="#1-2-解决" class="headerlink" title="1.2 解决"></a>1.2 解决</h2><blockquote>
+<p>1、校验请求产生，使参数合法，如判断id必须大于0。</p>
+</blockquote>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/19/Redis缓存雪崩、缓存击穿、缓存雪崩/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-MySQL读性能瓶颈如何处理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -169,7 +248,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>首先需要分析数据库读性能瓶颈主要发生在哪里，不需要一碰到读瓶颈就想到主从，因为主从架构比较复杂，对于数据量大、并发量高、一致性要求高的业务场景会加大研发难度。<br>可以从缓存、分表、再主从去考虑，在开发中碰到读问题应最先考虑到使用缓存，为避免缓存雪崩、缓存击穿等问题可以对大表进行水平分表，最后再考虑主从(主从也不是必须，在缓存失效前提前更新缓存)</p>
+        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>首先需要分析数据库读性能瓶颈主要发生在哪里，不需要一碰到读瓶颈就想到主从，因为主从架构比较复杂，对于数据量大、并发量高、一致性要求高的业务场景会加大研发难度。<br>可以从缓存、分表、再主从去考虑，在开发中碰到读问题应最先考虑到使用redis缓存，为避免缓存雪崩、缓存击穿、缓存雪崩等问题可以对大表进行水平分表提高效率，最后再考虑主从(主从也不是必须，在缓存失效前提前更新缓存)。<br><a href="">缓存雪崩、缓存击穿、缓存雪崩等问题</a>可通过代码去优化。</p>
         
       
 
@@ -820,82 +899,6 @@
 
 
   
-    <article id="post-防火墙开放端口" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/29/防火墙开放端口/">防火墙开放端口</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/29/防火墙开放端口/" class="archive-article-date">
-  	<time datetime="2019-08-29T10:02:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-29</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>当在服务器安全组开启了指定端口后依然无法访问服务器项目，在没有配置错误的情况下最有可能的是防火前未手动开放端口。</p>
-<h1 id="2-检测服务器端口开发状态"><a href="#2-检测服务器端口开发状态" class="headerlink" title="2. 检测服务器端口开发状态"></a>2. 检测服务器端口开发状态</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ltunp | grep &lt;端口&gt;</span><br></pre></td></tr></table></figure>
-<p>如检查有开放则可能是项目未启动、源地址为非信任区域地址等，具体分析。</p>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/29/防火墙开放端口/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1001,6 +1004,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Linux</a>
               </li>
              
@@ -1010,14 +1021,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">Mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1033,11 +1036,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Python</a>
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+                <a href="javascript:void(0)" class="js-tag color2">Python</a>
               </li>
             
             <div class="clearfix"></div>
