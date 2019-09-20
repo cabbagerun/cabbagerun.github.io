@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="Lnmp集成开发环境">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-18T10:16:18.166Z">
+<meta property="og:updated_time" content="2019-09-20T01:53:26.721Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lnmp集成开发环境">
 <meta name="twitter:description" content="Lnmp集成开发环境">
@@ -247,7 +247,7 @@
 </li>
 </ol>
 <p>修改nginx.conf<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf</span><br><span class="line"></span><br><span class="line"><span class="comment">#设置server_name</span></span><br><span class="line">server_name www.lnmp.default.com lnmp.default.com;</span><br></pre></td></tr></table></figure></p>
-<p>修改hosts<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/hosts</span><br><span class="line"></span><br><span class="line"><span class="comment">#追加一行</span></span><br><span class="line">127.0.0.1 www.lnmp.default.com lnmp.default.com</span><br></pre></td></tr></table></figure></p>
+<p>linux修改hosts<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/hosts</span><br><span class="line"></span><br><span class="line"><span class="comment">#追加一行</span></span><br><span class="line">127.0.0.1 www.lnmp.default.com lnmp.default.com</span><br></pre></td></tr></table></figure></p>
 <p>重启nginx<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service nginx restart</span><br></pre></td></tr></table></figure></p>
 <p>windows修改hosts文件(我的在C:\Windows\System32\drivers\etc下)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#追加一行，127.0.0.2为我的网络配置ip</span></span><br><span class="line">127.0.0.2       www.lnmp.default.com lnmp.default.com</span><br></pre></td></tr></table></figure></p>
 <p>保存后就可以正常访问虚拟机项目了，如针对自己的www项目可以在/usr/local/nginx/conf/目录下新建vhost文件夹，新增自己的*.conf配置文件<br>如配置tp5项目(指定到更目录)和默认所有项目：</p>
