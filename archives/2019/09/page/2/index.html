@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="www.jr968.cn">
-  <title>MySQL读性能瓶颈如何处理 | JR968的博客</title>
+  <title>Archives: 2019/9 | JR968的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="MySQL读性能瓶颈如何处理">
-<meta name="keywords" content="MySQL">
-<meta property="og:type" content="article">
-<meta property="og:title" content="MySQL读性能瓶颈如何处理">
-<meta property="og:url" content="www.jr968.cn/2019/09/16/MySQL读性能瓶颈如何处理/index.html">
+  <meta name="description" content="JR968的博客">
+<meta property="og:type" content="website">
+<meta property="og:title" content="JR968的博客">
+<meta property="og:url" content="www.jr968.cn/archives/2019/09/page/2/index.html">
 <meta property="og:site_name" content="JR968的博客">
-<meta property="og:description" content="MySQL读性能瓶颈如何处理">
+<meta property="og:description" content="JR968的博客">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-19T06:59:27.183Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MySQL读性能瓶颈如何处理">
-<meta name="twitter:description" content="MySQL读性能瓶颈如何处理">
+<meta name="twitter:title" content="JR968的博客">
+<meta name="twitter:description" content="JR968的博客">
   
     <link rel="alternative" href="/atom.xml" title="JR968的博客" type="application/atom+xml">
   
@@ -149,207 +147,63 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-MySQL读性能瓶颈如何处理" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      MySQL读性能瓶颈如何处理
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/09/03/MinDoc接口文档管理系统/" class="archive-article-date">
+  	<time datetime="2019-09-03T06:12:38.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-03</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2019/09/03/MinDoc接口文档管理系统/">MinDoc接口文档管理系统</a>
     </h1>
   
 
-        
-        <a href="/2019/09/16/MySQL读性能瓶颈如何处理/" class="archive-article-date">
-  	<time datetime="2019-09-16T10:29:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h1><p>首先需要分析数据库读性能瓶颈主要发生在哪里，不需要一碰到读瓶颈就想到主从，因为主从架构比较复杂，对于数据量大、并发量高、一致性要求高的业务场景会加大研发难度。<br>可以从缓存、分表、再主从去考虑，在开发中碰到读问题应最先考虑到使用redis缓存，为避免缓存雪崩、缓存击穿、缓存雪崩等问题可以对大表进行水平分表提高效率，最后再考虑主从(主从也不是必须，在缓存失效前提前更新缓存)。<br><a href="">缓存雪崩、缓存击穿、缓存雪崩等问题</a>可通过代码去优化。</p>
-<a id="more"></a>
-<h1 id="2-水平分表"><a href="#2-水平分表" class="headerlink" title="2. 水平分表"></a>2. 水平分表</h1><p>常用的分表方法：按时间、按区间、按hash</p>
-<h2 id="2-1-按时间"><a href="#2-1-按时间" class="headerlink" title="2.1 按时间"></a>2.1 按时间</h2><p>针对时效性较强的数据(新数据使用率远远大于旧数据，如微博消息等)，按不同的时间进行水平分表，如月、季等。</p>
-<h2 id="2-2-按区间"><a href="#2-2-按区间" class="headerlink" title="2.2 按区间"></a>2.2 按区间</h2><p>按自增id的区间水平分表，如tb1：1~100W；tb2：101w~200w…</p>
-<h2 id="2-3-按hash"><a href="#2-3-按hash" class="headerlink" title="2.3 按hash"></a>2.3 按hash</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#crc32</span></span><br><span class="line"><span class="keyword">function</span> get_hash_table(<span class="variable">$table</span>, <span class="variable">$userid</span>) &#123;</span><br><span class="line">	<span class="variable">$str</span> = crc32(<span class="variable">$userid</span>);</span><br><span class="line">	<span class="keyword">if</span> (<span class="variable">$str</span> &lt; 0) &#123;</span><br><span class="line">		<span class="variable">$hash</span> = <span class="string">"0"</span> . substr(abs(<span class="variable">$str</span>), 0, 1);</span><br><span class="line">	&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">		<span class="variable">$hash</span> = substr(<span class="variable">$str</span>, 0, 2);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">return</span> <span class="variable">$table</span> . <span class="string">"_"</span> . <span class="variable">$hash</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h1 id="3-MySQL5-7主从配置"><a href="#3-MySQL5-7主从配置" class="headerlink" title="3. MySQL5.7主从配置"></a>3. MySQL5.7主从配置</h1><h2 id="3-1-TP5数据库配置文件"><a href="#3-1-TP5数据库配置文件" class="headerlink" title="3.1 TP5数据库配置文件"></a>3.1 TP5数据库配置文件</h2><p>注意：</p>
-<blockquote>
-<p>‘root,root’模式等效与’root’</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">return</span> [</span><br><span class="line">    // 数据库类型</span><br><span class="line">    <span class="string">'type'</span>            =&gt; Env::get(<span class="string">'database.type'</span>, <span class="string">'mysql'</span>),</span><br><span class="line">    // 服务器地址</span><br><span class="line">    <span class="string">'hostname'</span>        =&gt; Env::get(<span class="string">'database.hostname'</span>, <span class="string">'192.168.0.123,192.168.0.456'</span>),</span><br><span class="line">    // 数据库名</span><br><span class="line">    <span class="string">'database'</span>        =&gt; Env::get(<span class="string">'database.database'</span>, <span class="string">'dbname1,dbname2'</span>),</span><br><span class="line">    // 用户名</span><br><span class="line">    <span class="string">'username'</span>        =&gt; Env::get(<span class="string">'database.username'</span>, <span class="string">'root1,root2'</span>),</span><br><span class="line">    // 密码</span><br><span class="line">    <span class="string">'password'</span>        =&gt; Env::get(<span class="string">'database.password'</span>, <span class="string">'pwd1,pwd2'</span>),</span><br><span class="line">    // 端口</span><br><span class="line">    <span class="string">'hostport'</span>        =&gt; Env::get(<span class="string">'database.hostport'</span>, <span class="string">'port1,port2'</span>),</span><br><span class="line">    // 连接dsn</span><br><span class="line">    <span class="string">'dsn'</span>             =&gt; Env::get(<span class="string">'database.dsn'</span>, <span class="string">''</span>),</span><br><span class="line">    // 数据库连接参数</span><br><span class="line">    <span class="string">'params'</span>          =&gt;  Env::get(<span class="string">'database.params'</span>, []),</span><br><span class="line">    // 数据库编码默认采用utf8</span><br><span class="line">    <span class="string">'charset'</span>         =&gt; Env::get(<span class="string">'database.charset'</span>, <span class="string">'utf8'</span>),</span><br><span class="line">    // 数据库表前缀</span><br><span class="line">    <span class="string">'prefix'</span>          =&gt; Env::get(<span class="string">'database.prefix'</span>, <span class="string">'qf_'</span>),</span><br><span class="line">    // 数据库调试模式</span><br><span class="line">    <span class="string">'debug'</span>           =&gt; Env::get(<span class="string">'database.debug'</span>, <span class="literal">true</span>),</span><br><span class="line">    // 数据库部署方式:0 集中式(单一服务器),1 分布式(主从服务器)</span><br><span class="line">    <span class="string">'deploy'</span>          =&gt; Env::get(<span class="string">'database.deploy'</span>, 1),</span><br><span class="line">    // 数据库读写是否分离 主从式有效</span><br><span class="line">    <span class="string">'rw_separate'</span>     =&gt; Env::get(<span class="string">'database.rw_separate'</span>, <span class="literal">true</span>),</span><br><span class="line">    // 读写分离后 主服务器数量</span><br><span class="line">    <span class="string">'master_num'</span>      =&gt; Env::get(<span class="string">'database.master_num'</span>, 1),</span><br><span class="line">    // 指定从服务器序号，若留空则随机选择从服务器进行读取操作</span><br><span class="line">    <span class="string">'slave_no'</span>        =&gt; Env::get(<span class="string">'database.slave_no'</span>, <span class="string">''</span>),</span><br><span class="line">    // 是否严格检查字段是否存在</span><br><span class="line">    <span class="string">'fields_strict'</span>   =&gt; Env::get(<span class="string">'database.fields_strict'</span>, <span class="literal">true</span>),</span><br><span class="line">    // 数据集返回类型</span><br><span class="line">    <span class="string">'resultset_type'</span>  =&gt; Env::get(<span class="string">'database.resultset_type'</span>, <span class="string">'array'</span>),</span><br><span class="line">    // 自动写入时间戳字段</span><br><span class="line">    <span class="string">'auto_timestamp'</span>  =&gt; Env::get(<span class="string">'database.auto_timestamp'</span>, <span class="literal">false</span>),</span><br><span class="line">    // 时间字段取出后的默认时间格式,默认为Y-m<span class="_">-d</span> H:i:s</span><br><span class="line">    <span class="string">'datetime_format'</span> =&gt; Env::get(<span class="string">'database.datetime_format'</span>, <span class="literal">false</span>),</span><br><span class="line">    // 是否需要进行SQL性能分析</span><br><span class="line">    <span class="string">'sql_explain'</span>     =&gt; Env::get(<span class="string">'database.sql_explain'</span>, <span class="literal">false</span>),</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
-<p>如上配置就已经基本完成了主从配置，但只限于主写从读，所以必须要主从数据同步来保证数据一致性</p>
-<h2 id="3-2-主从数据同步配置"><a href="#3-2-主从数据同步配置" class="headerlink" title="3.2 主从数据同步配置"></a>3.2 主从数据同步配置</h2><p>前提:</p>
-<blockquote>
-<p>MySQL版本一致<br>MySQL中的数据及结构一致<br>操作前停止一切更新操作(写入、更新、删除等)<br>服务器时间一定要保持一致，否则无法同步，可以使用<code>date -s &lt;HH:ii:ss&gt;</code>设置</p>
-</blockquote>
-<h3 id="3-2-1-数据库半自动复制插件"><a href="#3-2-1-数据库半自动复制插件" class="headerlink" title="3.2.1 数据库半自动复制插件"></a>3.2.1 数据库半自动复制插件</h3><p>主：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install plugin rpl_semi_sync_master soname <span class="string">'semisync_master.so'</span>;</span><br></pre></td></tr></table></figure></p>
-<p>从：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">install plugin rpl_semi_sync_slave soname <span class="string">'semisync_slave.so'</span>;</span><br></pre></td></tr></table></figure></p>
-<h3 id="3-2-1-my-cnf配置"><a href="#3-2-1-my-cnf配置" class="headerlink" title="3.2.1 my.cnf配置"></a>3.2.1 my.cnf配置</h3><p>主：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">rpl_semi_sync_master_enabled=1</span><br><span class="line">rpl_semi_sync_master_timeout=1000   <span class="comment">#此单位是毫秒</span></span><br><span class="line"><span class="built_in">log</span>-bin=mysql-bin <span class="comment">#打开日志(主机需要打开)</span></span><br><span class="line">server-id=1 <span class="comment">#服务器id</span></span><br><span class="line"><span class="comment">#给从机同步的库，可以多个</span></span><br><span class="line">binlog-do-db=db1</span><br><span class="line">binlog-do-db=db2</span><br><span class="line">binlog-do-db=<span class="built_in">test</span></span><br><span class="line">expire_logs_days=1 <span class="comment">#自动清理1天前的log文件</span></span><br></pre></td></tr></table></figure></p>
-<p>从：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">rpl_semi_sync_slave_enabled=1</span><br><span class="line">server-id=2 <span class="comment">#服务器id</span></span><br><span class="line"><span class="comment">#要从主机同步的库</span></span><br><span class="line">replicate-do-db=db1</span><br><span class="line">replicate-do-db=db2</span><br><span class="line">replicate-do-db=<span class="built_in">test</span></span><br></pre></td></tr></table></figure></p>
-<p>需重启数据库</p>
-<h3 id="3-2-2-配置主从数据库"><a href="#3-2-2-配置主从数据库" class="headerlink" title="3.2.2 配置主从数据库"></a>3.2.2 配置主从数据库</h3><p>主：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">GRANT REPLICATION SLAVE ON *.* TO <span class="string">'root'</span>@<span class="string">'192.168.0.456'</span> IDENTIFIED BY <span class="string">'XXXXXX'</span>; <span class="comment">#主数据库授权从数据库root同步账户权限</span></span><br><span class="line">FLUSH PRIVILEGES; <span class="comment">#刷新权限</span></span><br><span class="line">SHOW MASTER STATUS; <span class="comment">#查看主服务状态如下：</span></span><br><span class="line"></span><br><span class="line">MySQL [(none)]&gt; SHOW MASTER STATUS;</span><br><span class="line">+------------------+----------+--------------+------------------+-------------------+</span><br><span class="line">| File             | Position | Binlog_Do_DB | Binlog_Ignore_DB | Executed_Gtid_Set |</span><br><span class="line">+------------------+----------+--------------+------------------+-------------------+</span><br><span class="line">| mysql-bin.000026 |      154 |              |                  |                   |</span><br><span class="line">+------------------+----------+--------------+------------------+-------------------+</span><br></pre></td></tr></table></figure></p>
-<p>从：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#配置和改变slave服务器用于连接master服务器的参数</span></span><br><span class="line">CHANGE MASTER TO MASTER_HOST=<span class="string">'192.168.0.123'</span>,MASTER_USER=<span class="string">'root'</span>, MASTER_PASSWORD=<span class="string">'XXXXXX'</span>,MASTER_LOG_FILE=<span class="string">'mysql-bin.000026'</span>,MASTER_LOG_POS=154;</span><br><span class="line">start slave; <span class="comment">#开启SLAVE同步</span></span><br><span class="line">show slave status \G; <span class="comment">#查看下slave状态，当Slave_IO_Running和Slave_SQL_Running都为Yes，说明主从复制配置成功</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="3-2-4-撤销同步账号权限"><a href="#3-2-4-撤销同步账号权限" class="headerlink" title="3.2.4 撤销同步账号权限"></a>3.2.4 撤销同步账号权限</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">stop slave; <span class="comment">#停止SLAVE同步</span></span><br><span class="line">GRANT REPLICATION SLAVE ON *.* TO <span class="string">'root'</span>@<span class="string">'192.168.0.456'</span> IDENTIFIED BY <span class="string">'XXXXXX'</span>;<span class="comment"># 撤销已经赋予给MySQL同步账户的权限</span></span><br><span class="line">REVOKE REPLICATION SLAVE ON *.* FROM <span class="string">'root'</span>@<span class="string">'192.168.0.456'</span>;<span class="comment">#revoke 跟 grant 的语法差不多，只需要把关键字 “to” 换成 “from” 即可</span></span><br></pre></td></tr></table></figure>
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/alipay.png">
-                      <span class="reward-type">支付宝</span>
-                    </div>
-                    
-                    
-                    <div class="reward-box-item">
-                      <img class="reward-img" src="/img/weixin.png">
-                      <span class="reward-type">微信</span>
-                    </div>
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
-        </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http:www.jr968.cn/2019/09/16/MySQL读性能瓶颈如何处理/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2019/09/19/Redis缓存雪崩、缓存击穿、缓存雪崩/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Redis缓存雪崩、缓存击穿、缓存雪崩
-        
-      </div>
-    </a>
   
   
-    <a href="/2019/09/14/netdata开源服务器监控工具/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">netdata开源服务器监控工具</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
+    
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/archives/2019/09/">&laquo; Prev</a><a class="page-number" href="/archives/2019/09/">1</a><span class="page-number current">2</span>
+    </nav>
   
 
 
@@ -373,8 +227,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
