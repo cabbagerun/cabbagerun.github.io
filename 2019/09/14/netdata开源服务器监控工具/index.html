@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="netdata开源服务器监控工具">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-20T10:15:33.262Z">
+<meta property="og:updated_time" content="2019-09-23T02:46:18.960Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="netdata开源服务器监控工具">
 <meta name="twitter:description" content="netdata开源服务器监控工具">
@@ -175,7 +175,7 @@
 <blockquote>
 <p>在执行安装前可能会出现找不到nodejs、libuv-devel、Judy-devel等包找不到的情况，需要手动安装<br>在启动监控服务需要重启环境时要确保不影响线上服务的正常运行</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#依赖</span></span><br><span class="line">yum install zlib-devel gcc make git autoconf autogen automake pkgconfig</span><br><span class="line"></span><br><span class="line"><span class="comment">#安装</span></span><br><span class="line">bash &lt;(curl -Ss https://my-netdata.io/kickstart.sh) all</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#依赖</span></span><br><span class="line">yum install zlib-devel gcc make git autoconf autogen automake pkgconfig</span><br><span class="line"></span><br><span class="line"><span class="comment">#官方提供安装</span></span><br><span class="line">bash &lt;(curl -Ss https://my-netdata.io/kickstart.sh)</span><br><span class="line"></span><br><span class="line"><span class="comment">#或</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#国内安装</span></span><br><span class="line">bash &lt;(curl -Ss https://my-netdata.io/kickstart.sh) --stable-channel</span><br></pre></td></tr></table></figure>
 <h2 id="2-1-安装nodejs"><a href="#2-1-安装nodejs" class="headerlink" title="2.1 安装nodejs"></a>2.1 安装nodejs</h2><p>下载：<a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">https://nodejs.org/en/download/</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获取</span></span><br><span class="line">wget https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.xz</span><br><span class="line"></span><br><span class="line"><span class="comment">#解压</span></span><br><span class="line">tar -xvf node-v10.16.3-linux-x64.tar.xz &amp; mv node-v10.16.3 /usr/<span class="built_in">local</span>/nodejs</span><br><span class="line"></span><br><span class="line"><span class="comment">#配置环境变量</span></span><br><span class="line">vim .bash_profile</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> NODE_HOME=/usr/<span class="built_in">local</span>/nodejs</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$NODE_HOME</span>/bin </span><br><span class="line"><span class="built_in">export</span> NODE_PATH=<span class="variable">$NODE_HOME</span>/lib/node_modules</span><br><span class="line"></span><br><span class="line"><span class="comment">#加载配置</span></span><br><span class="line"><span class="built_in">source</span> .bash_profile</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看</span></span><br><span class="line">node -v</span><br></pre></td></tr></table></figure></p>
 <h2 id="2-2-安装libuv-devel"><a href="#2-2-安装libuv-devel" class="headerlink" title="2.2 安装libuv-devel"></a>2.2 安装libuv-devel</h2><p>注意：libuv-devel依赖于libuv</p>
 <p>下载：<a href="https://cbs.centos.org/koji/" target="_blank" rel="noopener">https://cbs.centos.org/koji/</a> 下搜索并下载x86_64的rpm包</p>
@@ -453,14 +453,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">Github</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">Git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据安全</a>
               </li>
              
@@ -478,6 +470,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">MySQL</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">Git</a>
               </li>
              
               <li class="article-tag-list-item">
