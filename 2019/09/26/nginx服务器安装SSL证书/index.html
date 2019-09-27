@@ -6,18 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="www.jr968.cn">
-  <title>Archives: 2019/9 | JR968的博客</title>
+  <title>nginx服务器安装SSL证书(http转https协议) | JR968的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JR968的博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="JR968的博客">
-<meta property="og:url" content="www.jr968.cn/archives/2019/09/index.html">
+  <meta name="description" content="nginx服务器安装SSL证书(http转https协议)">
+<meta name="keywords" content="Nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="nginx服务器安装SSL证书(http转https协议)">
+<meta property="og:url" content="www.jr968.cn/2019/09/26/nginx服务器安装SSL证书/index.html">
 <meta property="og:site_name" content="JR968的博客">
-<meta property="og:description" content="JR968的博客">
+<meta property="og:description" content="nginx服务器安装SSL证书(http转https协议)">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-09-27T02:16:20.047Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JR968的博客">
-<meta name="twitter:description" content="JR968的博客">
+<meta name="twitter:title" content="nginx服务器安装SSL证书(http转https协议)">
+<meta name="twitter:description" content="nginx服务器安装SSL证书(http转https协议)">
   
     <link rel="alternative" href="/atom.xml" title="JR968的博客" type="application/atom+xml">
   
@@ -147,36 +149,72 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-nginx服务器安装SSL证书" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/26/nginx服务器安装SSL证书/" class="archive-article-date">
-  	<time datetime="2019-09-26T10:35:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-26</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/26/nginx服务器安装SSL证书/">nginx服务器安装SSL证书(http转https协议)</a>
+    <h1 class="article-title" itemprop="name">
+      nginx服务器安装SSL证书(http转https协议)
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/09/26/nginx服务器安装SSL证书/" class="archive-article-date">
+  	<time datetime="2019-09-26T10:35:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-购买阿里云免费证书"><a href="#1-购买阿里云免费证书" class="headerlink" title="1. 购买阿里云免费证书"></a>1. 购买阿里云免费证书</h1><p>阿里云首页-》云安全-》SSL证书-》立即购买-》选择【免费型DV SSL】-》购买成功后去到证书控制台-》证书申请对应的域名即可-》申请完成等审核成功后下载证书到自己的服务</p>
+<a id="more"></a>
+<h1 id="2-nginx服务器安装SSL证书"><a href="#2-nginx服务器安装SSL证书" class="headerlink" title="2. nginx服务器安装SSL证书"></a>2. nginx服务器安装SSL证书</h1><h2 id="2-1-证书修改"><a href="#2-1-证书修改" class="headerlink" title="2.1 证书修改"></a>2.1 证书修改</h2><p>阿里云证书文件采用Base64-encoded的PEM格式文本文件，修改.pem扩展名为.crt。<br>在nginx安装目录创建cert目录，可指定项目目录，如/usr/local/nignx/cert/myproject/，将证书保存到此目录中。</p>
+<h2 id="2-2-修改nginx配置文件"><a href="#2-2-修改nginx配置文件" class="headerlink" title="2.2 修改nginx配置文件"></a>2.2 修改nginx配置文件</h2><p>修改对应项目配置文件myproject.conf如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"> listen 443;<span class="comment">#由80改为监听443</span></span><br><span class="line"> server_name 域名;</span><br><span class="line"> ssl on;<span class="comment">#开启ssl</span></span><br><span class="line"> root html;</span><br><span class="line"> index index.html index.htm;</span><br><span class="line"> ssl_certificate   /usr/<span class="built_in">local</span>/nignx/cert/myproject/a.pem;</span><br><span class="line"> ssl_certificate_key  /usr/<span class="built_in">local</span>/nignx/cert/myproject/a.key;</span><br><span class="line"> ssl_session_timeout 5m;</span><br><span class="line"> ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line"> ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line"> ssl_prefer_server_ciphers on;</span><br><span class="line"> location / &#123;</span><br><span class="line">     root html;</span><br><span class="line">     index index.html index.htm;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">#部分配置已省略...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>重启nginx，访问https://域名</p>
+<h1 id="3-http和https可同时访问"><a href="#3-http和https可同时访问" class="headerlink" title="3. http和https可同时访问"></a>3. http和https可同时访问</h1><p>由于http的请求被发送到https的端口上去了，导致http请求400。<br>解决办法：把ssl on;去掉，ssl写在443端口后面。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line"> listen 80 default backlog=2048;<span class="comment">#设置挂起状态连接的队列大小，确保链接进入php-fpm的accept queue进行处理</span></span><br><span class="line"> listen 443 ssl;</span><br><span class="line"> server_name 域名;</span><br><span class="line"> root html;</span><br><span class="line"> index index.html index.htm;</span><br><span class="line"> ssl_certificate   /usr/<span class="built_in">local</span>/nignx/cert/myproject/a.pem;</span><br><span class="line"> ssl_certificate_key  /usr/<span class="built_in">local</span>/nignx/cert/myproject/a.key;</span><br><span class="line"> ssl_session_timeout 5m;</span><br><span class="line"> ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;</span><br><span class="line"> ssl_protocols TLSv1 TLSv1.1 TLSv1.2;</span><br><span class="line"> ssl_prefer_server_ciphers on;</span><br><span class="line"> location / &#123;</span><br><span class="line">     root html;</span><br><span class="line">     index index.html index.htm;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">#部分配置已省略...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Nginx backlog配置概述：<a href="https://www.jianshu.com/p/3ecc99ebf566" target="_blank" rel="noopener">https://www.jianshu.com/p/3ecc99ebf566</a></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/weixin.png">
+                      <span class="reward-type">微信</span>
+                    </div>
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -188,364 +226,105 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http:www.jr968.cn/2019/09/26/nginx服务器安装SSL证书/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/20/MySQL用户管理/" class="archive-article-date">
-  	<time datetime="2019-09-20T09:08:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-20</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/09/20/MySQL用户管理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">MySQL用户管理</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/20/MySQL用户管理/">MySQL用户管理</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/19/Redis缓存雪崩、缓存击穿、缓存雪崩/" class="archive-article-date">
-  	<time datetime="2019-09-19T07:00:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/19/Redis缓存雪崩、缓存击穿、缓存雪崩/">Redis缓存雪崩、缓存击穿、缓存雪崩</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/16/MySQL读性能瓶颈如何处理/" class="archive-article-date">
-  	<time datetime="2019-09-16T10:29:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/16/MySQL读性能瓶颈如何处理/">MySQL读性能瓶颈如何处理</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/14/netdata开源服务器监控工具/" class="archive-article-date">
-  	<time datetime="2019-09-14T13:15:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-14</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/14/netdata开源服务器监控工具/">netdata开源服务器监控工具</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/12/centos中yum-update和yum-upgrade命令的坑/" class="archive-article-date">
-  	<time datetime="2019-09-12T09:44:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/12/centos中yum-update和yum-upgrade命令的坑/">centos中yum update和yum upgrade命令的坑</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/10/centos增加swap分区/" class="archive-article-date">
-  	<time datetime="2019-09-10T02:13:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-10</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/10/centos增加swap分区/">centos增加swap分区</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/07/MySQL数据备份/" class="archive-article-date">
-  	<time datetime="2019-09-07T03:42:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-07</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/07/MySQL数据备份/">MySQL数据备份</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">MySQL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/06/centos下exrundelete恢复误删数据/" class="archive-article-date">
-  	<time datetime="2019-09-06T01:56:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/06/centos下exrundelete恢复误删数据/">centos下exrundelete恢复误删数据</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/09/05/Function-Redis-delete-is-deprecated/" class="archive-article-date">
-  	<time datetime="2019-09-05T12:16:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-05</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/09/05/Function-Redis-delete-is-deprecated/">Function Redis::delete() is deprecated</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">PHP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2019/09/page/2/">2</a><a class="extend next" rel="next" href="/archives/2019/09/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -569,8 +348,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
