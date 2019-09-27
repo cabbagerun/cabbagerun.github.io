@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="Lnmp集成开发环境">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-27T02:34:23.381Z">
+<meta property="og:updated_time" content="2019-09-27T09:05:26.381Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lnmp集成开发环境">
 <meta name="twitter:description" content="Lnmp集成开发环境">
@@ -219,7 +219,27 @@
 </li>
 </ol>
 <h1 id="4-OneinStack集成安装"><a href="#4-OneinStack集成安装" class="headerlink" title="4. OneinStack集成安装"></a>4. OneinStack集成安装</h1><p><a href="https://oneinstack.com/install/" target="_blank" rel="noopener">https://oneinstack.com/install/</a></p>
-<h1 id="5-virtualbox-centos7共享项目"><a href="#5-virtualbox-centos7共享项目" class="headerlink" title="5. virtualbox+centos7共享项目"></a>5. virtualbox+centos7共享项目</h1><p>主要是将window下的项目共享到lnmp环境中运行</p>
+<h2 id="4-1-多版本php，演示php7-3"><a href="#4-1-多版本php，演示php7-3" class="headerlink" title="4.1 多版本php，演示php7.3"></a>4.1 多版本php，演示php7.3</h2><p>注意：针对项目使用不同版本php是需要手动切换</p>
+<ol>
+<li><p>停止php</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">service php-fpm stop</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改OneinStack中option.conf php安装目录，修改完成进行安装，只安装php和想要安装的php扩展</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">php_install_dir=/usr/<span class="built_in">local</span>/php</span><br><span class="line"><span class="comment">#改为</span></span><br><span class="line">php_install_dir=/usr/<span class="built_in">local</span>/php73</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改启动项(我的启动项目录为/usr/lib/systemd/systemd/)<br>复制一份php-fpm.service为php73-fpm.service，并修改内容为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=The PHP FastCGI Process Manager</span><br><span class="line">Documentation=http://php.net/docs.php</span><br><span class="line">After=network.target</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">PIDFile=/usr/<span class="built_in">local</span>/php73/var/run/php-fpm.pid</span><br><span class="line">ExecStart=/usr/<span class="built_in">local</span>/php73/sbin/php-fpm --nodaemonize --fpm-config /usr/<span class="built_in">local</span>/php73/etc/php-fpm.conf</span><br><span class="line">ExecReload=/bin/<span class="built_in">kill</span> -USR2 <span class="variable">$MAINPID</span></span><br><span class="line">LimitNOFILE=1000000</span><br><span class="line">LimitNPROC=1000000</span><br><span class="line">LimitCORE=1000000</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>假设原php版本为5.6，可修改php-fpm.service为php56-fpm.service，方便记忆</p>
+<p>启动php<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看php状态</span></span><br><span class="line">ps -ef | grep fpm</span><br><span class="line"></span><br><span class="line"><span class="comment">#存在已启动php且需要切换版本先停止</span></span><br><span class="line">service php56-fpm stop</span><br><span class="line"></span><br><span class="line"><span class="comment">#启动</span></span><br><span class="line">service php73-fpm start</span><br></pre></td></tr></table></figure></p>
+<ol start="4">
+<li>同时启动多个php(特殊要求处理，需多个版本同时支持)<br>修改php配置文件/usr/local/php73/etc/php-fpm.conf，避免麻烦旧版本可不改，主要是自己记得就好<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">listen = /dev/shm/php-cgi.sock</span><br><span class="line"><span class="comment">#改为</span></span><br><span class="line">listen = /dev/shm/php73-cgi.sock</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>修改nginx配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fastcgi_pass unix:/dev/shm/php-cgi.sock;</span><br><span class="line"><span class="comment">#改为</span></span><br><span class="line">fastcgi_pass unix:/dev/shm/php73-cgi.sock;</span><br></pre></td></tr></table></figure></p>
+<p>启动php<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service php56-fpm start</span><br><span class="line">service php73-fpm start</span><br></pre></td></tr></table></figure></p>
+<h3 id="4-1-1-修改option-conf"><a href="#4-1-1-修改option-conf" class="headerlink" title="4.1.1 修改option.conf"></a>4.1.1 修改option.conf</h3><h1 id="5-virtualbox-centos7共享项目"><a href="#5-virtualbox-centos7共享项目" class="headerlink" title="5. virtualbox+centos7共享项目"></a>5. virtualbox+centos7共享项目</h1><p>主要是将window下的项目共享到lnmp环境中运行</p>
 <ol>
 <li><p>virtualbox界面选择对应虚拟机-》设置-》共享文件夹-》添加项目(这里文件夹名称为”www”，即自己项目文件夹名称，勾选自动挂载和固定分区)</p>
 </li>
