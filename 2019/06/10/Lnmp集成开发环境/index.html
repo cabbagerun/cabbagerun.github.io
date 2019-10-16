@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="Lnmp集成开发环境">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-27T09:45:52.640Z">
+<meta property="og:updated_time" content="2019-10-16T07:18:14.558Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Lnmp集成开发环境">
 <meta name="twitter:description" content="Lnmp集成开发环境">
@@ -261,7 +261,7 @@
 <p>此步骤有可能报错：提示”vboxsf”这个系统文件类型未定义，则需要安装增强功能<br>启动的虚拟机窗口-》设备-》安装增强功能(安装成功会提示运行)<br>在执行挂在命令即可</p>
 <ol start="6">
 <li><p>开机自动挂载</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="comment">#增加一行</span></span><br><span class="line">www /data/wwwroot/www vboxsf defaults 0 0</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/fstab</span><br><span class="line"></span><br><span class="line"><span class="comment">#增加一行</span></span><br><span class="line"><span class="comment">#defaults第一个值叫fs_freq，用来决定哪一个文件系统需要执行dump操作(dump执行ext2的文件系统的备份操作)，0就是不需要；</span></span><br><span class="line"><span class="comment">#defaults第二个值叫fs_passno，是系统重启时fsck程序检测磁盘(fsck检测和修复文件系统)的顺序号，0表示该文件系统不被检测，1是root文件系统，2是别的文件系统，fsck按序号检测磁盘</span></span><br><span class="line">www /data/wwwroot/www vboxsf defaults 0 0</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>oneinstack default目录虚拟域名配置</p>
 </li>
