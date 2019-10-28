@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="JR968的博客">
 <meta property="og:description" content="Git安装与使用入门教程">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-14T02:18:11.414Z">
+<meta property="og:updated_time" content="2019-10-28T08:45:59.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git安装与使用">
 <meta name="twitter:description" content="Git安装与使用入门教程">
@@ -200,13 +200,13 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">log</span></span><br><span class="line">git reflog <span class="comment">#关闭命令窗口后使用此命令</span></span><br><span class="line">git <span class="built_in">log</span> &lt;filename/dirname&gt; <span class="comment">#指定文件或目录</span></span><br><span class="line">git <span class="built_in">log</span> -p &lt;filename&gt; <span class="comment">#查看提交所带来的改动，可指定文件</span></span><br><span class="line">git blame &lt;filename&gt; <span class="comment">#查看文件的每个部分是谁修改的</span></span><br></pre></td></tr></table></figure>
 <h2 id="4-2-回滚操作"><a href="#4-2-回滚操作" class="headerlink" title="4.2 回滚操作"></a>4.2 回滚操作</h2><p>1.回滚某个文件到之前的版本，执行命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout <span class="built_in">log</span>-id &lt;文件&gt;</span><br></pre></td></tr></table></figure>
-<p>2.回退至上个版本，执行命令：</p>
+<p>2.回退至上个已提交的版本，执行命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^ <span class="comment">#或HEAD~n 多个版本</span></span><br><span class="line">git reset --hard <span class="built_in">log</span>-id <span class="comment">#指定版本</span></span><br></pre></td></tr></table></figure>
 <p>3.撤销未提交修改<br>3.1 未提交版本，执行命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -- &lt;文件&gt;</span><br></pre></td></tr></table></figure>
-<p>3.2 提交暂存区，执行命令：</p>
+<p>3.2 提交暂存区(即git add)，执行命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset HEAD &lt;文件&gt;</span><br><span class="line">git checkout -- &lt;文件&gt;</span><br></pre></td></tr></table></figure>
-<p>3.3 提交版本库，执行命令：</p>
+<p>3.3 提交版本库(即git commit)，执行命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^ <span class="comment">#或HEAD~n 多个版本</span></span><br><span class="line">git reset --hard <span class="built_in">log</span>-id <span class="comment">#指定版本</span></span><br></pre></td></tr></table></figure>
 <h2 id="4-3-保存工作现场"><a href="#4-3-保存工作现场" class="headerlink" title="4.3 保存工作现场"></a>4.3 保存工作现场</h2><p>当正在开发中时又新接一个急着处理的需求时，而且正在开发的东西有还没有完成，不利于提交代码时我们就需要保存当前的工作现场，处理完棘手需求后在还原继续。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git stash <span class="comment">#保存工作</span></span><br><span class="line">git stash list <span class="comment">#查看工作</span></span><br><span class="line">git stash pop <span class="comment">#还原最新的工作</span></span><br><span class="line">git stash pop stash@&#123;num&#125; <span class="comment">#指定还原工作</span></span><br><span class="line">git stash clear <span class="comment">#清空所有工作</span></span><br><span class="line">git stash drop stash@&#123;num&#125; <span class="comment">#删除指定工作</span></span><br></pre></td></tr></table></figure>
